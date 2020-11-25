@@ -7,52 +7,21 @@
         <div class="table-responsive">
             <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                 <thead>
-                    <th>Email</th>
-                    <th>Nome</th>
-                    <th>Ruolo</th>
-                    <th>Data registrazione</th>
-                    <th></th>
+                    <th>Email ⇵</th>
+                    <th>Cognome Nome ⇵</th>
+                    <th>Ruolo ⇵</th>
+                    <th>Data registrazione ⇵</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for user in user_list %}
+
                     <tr>
-                        <td>{{ user.email}}</td>
+                        <td>>{{ user.email}}</td>
                         <td>{{ user.last_name}} {{ user.first_name}}</td>
                         <td>{{ user.profile.user_type}}</td>
                         <td>{{ user.date_joined}}</td>
                     </tr>
-                    <!--<div class="modal fade bd-example-modal-lg" id="exampleModalCenter{{user.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">
-                                        {{ user.email }}
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-sm font-weight-bold text-primary text-uppercase mb-1">{{ user.last_name }} {{user.first_name}}
-                                                </div>
-                                                <div class="text-sm font-weight-bold text-primary mb-1">{{ user.profile.user_type }}
-                                                </div>
-                                                <div class="text-sm text-primary mb-1">{{ user.date_joined }}
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                -->
                     {% endfor %}
                 </tbody>
             </table>

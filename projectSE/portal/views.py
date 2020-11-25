@@ -20,10 +20,20 @@ def user_login(request):
                     if (user.profile.user_type == 'Maintainer'):
                         return redirect('maintainer_home')
                 else:
-                    return HttpResponse('Disabled')
+
+                    form = LoginForm()
+                    context = {
+                        'form' : form,
+                        'error' : 'Account inattivo:'
+                    }
+                return render(request,'portal/login.html',context)
             else:
-                print(user)
-                return HttpResponse('Invalid login')
+                form = LoginForm()
+                context = {
+                    'form' : form,
+                    'error' : 'Mail e/o password errate:'
+                }
+                return render(request,'portal/login.html',context)
     else:
         form = LoginForm()
     return render(request, 'portal/login.html', {'form':form})
