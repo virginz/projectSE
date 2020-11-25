@@ -1,0 +1,106 @@
+{% extends 'admin_base.html' %} {% block content %}
+<div class="card shadow mb-4">
+    <div class="card-header">
+        <h5 class="font-weight-normal text-primary">Lista utenti</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <th>Email</th>
+                    <th>Nome</th>
+                    <th>Ruolo</th>
+                    <th>Data registrazione</th>
+                    <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in user_list %}
+                    <tr>
+                        <td>{{ user.email}}</td>
+                        <td>{{ user.last_name}} {{ user.first_name}}</td>
+                        <td>{{ user.profile.user_type}}</td>
+                        <td>{{ user.date_joined}}</td>
+                        <td>
+                            {% if user.profile.user_type == 'Studente' %}
+                            <button class="btn btn-primary btn-circle btn-sm ml-2" data-toggle="modal" data-target="#exampleModalCenter{{user.pk}}"><i class="fas fa-info "></i></button>{% else %} <button class="btn btn-primary btn-circle btn-sm ml-2"
+                                data-toggle="modal" data-target="#exampleModalCenter{{user.pk}}" disabled><i class="fas fa-info "></i></button> {% endif %}
+                        </td>
+                    </tr>
+                    <div class="modal fade bd-example-modal-lg" id="exampleModalCenter{{user.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">
+                                        {{ user.email }}
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-sm font-weight-bold text-primary text-uppercase mb-1">{{ user.last_name }} {{user.first_name}}
+                                                </div>
+                                                <div class="text-sm font-weight-bold text-primary mb-1">{{ user.profile.user_type }}
+                                                </div>
+                                                {% if user.profile.user_type == 'Studente' %}
+                                                <div class="text-sm text-primary mb-1">{{ user.profile.id_number }}
+                                                </div>
+                                                <div class="text-sm text-primary mb-1">{{ user.profile.cfu }} CFU
+                                                </div>
+                                                <div class="text-sm text-primary mb-1">{{ user.profile.curriculum }}
+                                                </div>
+                                                {% endif %}
+                                                <div class="text-sm text-primary mb-1">{{ user.date_joined }}
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+
+                                    {% ifequal topic.topic_owner user.profile %}
+
+                                    <div class="my-2"></div>
+                                    {% ifequal topic.state 'Approvata' %}
+                                    <form action="{% url 'topic_edit' topic.pk %}" method="get" style="float: left"> {% csrf_token %}
+                                        <button class="btn btn-info btn-circle mb-2" disabled><i class="fas fa-edit"></i></button>
+                                    </form>
+                                    {% else %}
+                                    <form action="{% url 'topic_edit' topic.pk %}" method="get" style="float: left"> {% csrf_token %}
+                                        <button class="btn btn-info btn-circle mb-2"><i class="fas fa-edit"></i></button>
+                                    </form>
+                                    {% endifequal %}
+                                    <div class="my-2 "></div>
+                                    <form action="{% url 'topic_copy' topic.pk %}" method="get" style="float: left">
+                                        <button class="btn btn-warning btn-circle mb-2"><i class="fas fa-copy"></i></button>
+                                    </form>
+                                    <div class="my-2 "></div>
+                                    {% ifequal topic.state 'Approvata' %}
+                                    <form action="{% url 'topic_delete' topic.pk %}" method="post">
+                                        {% csrf_token %}
+                                        <button class="btn btn-danger btn-circle  " onclick="return confirm('Are you sure?');" disabled><i class="fas fa-trash "></i></button>
+                                    </form>
+                                    {% else %}
+                                    <form action="{% url 'topic_delete' topic.pk %}" method="post">
+                                        {% csrf_token %}
+                                        <button class="btn btn-danger btn-circle  " onclick="return confirm('Are you sure?');"><i class="fas fa-trash "></i></button>
+                                    </form>
+                                    {% endifequal %} {% endifequal %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

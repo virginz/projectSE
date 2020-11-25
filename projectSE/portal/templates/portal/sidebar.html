@@ -1,0 +1,65 @@
+<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'systemadministrator_home' %}">
+        <div class="sidebar-brand-icon ">
+            <i class="fas fa-university"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Portale Tesi</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Tool
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'systemadministrator_home' %}">
+            <i class="fas fa-fw fa-home"></i>
+            <span>Home</span></a>
+    </li>
+    <hr class="sidebar-divider">
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'systemadministrator_home' %}">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Aggiungi utenti</span></a>
+    </li>
+    <hr class="sidebar-divider">
+    <li class="nav-item">
+        <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-clipboard"></i>
+            <span>Argomenti di tesi</span></a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header"></h6>
+                <a class="collapse-item" href="{% url 'systemadministrator_home' %}">Lista Argomenti</a>
+                <a class="collapse-item" href="{% url 'systemadministrator_home' %}">Aggiungi nuovo argomento</a>
+                <a class="collapse-item" href="{% url 'systemadministrator_home' %}">Carica lista argomenti</a>
+            </div>
+        </div>
+    </li>
+    <hr class="sidebar-divider">
+    <li class="nav-item">
+        <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+            <i class="fas fa-fw fa-at"></i>
+            <span>Email</span></a>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header"></h6>
+                <a class="collapse-item" href="{% url 'systemadministrator_home' %}">Email di sistema</a>
+                <a class="collapse-item" href="{% url 'systemadministrator_home' %}">Invia Email</a>
+            </div>
+        </div>
+    </li>
+    <hr class="sidebar-divider">
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>
+<!-- End of Sidebar -->

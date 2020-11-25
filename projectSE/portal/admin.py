@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Competences, SystemUser
+from .models import Competences, Profile
 # Register your models here.
 admin.site.register(Competences)
-admin.site.register(SystemUser)
+admin.site.register(Profile)
