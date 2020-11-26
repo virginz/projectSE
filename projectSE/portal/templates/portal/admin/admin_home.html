@@ -11,16 +11,26 @@
                     <th>Cognome Nome ⇵</th>
                     <th>Ruolo ⇵</th>
                     <th>Data registrazione ⇵</th>
+                    <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for user in user_list %}
 
                     <tr>
-                        <td>>{{ user.email}}</td>
+                        <td>{{ user.email}}</td>
                         <td>{{ user.last_name}} {{ user.first_name}}</td>
                         <td>{{ user.profile.user_type}}</td>
                         <td>{{ user.date_joined}}</td>
+                        <td>
+                            <form action="{% url 'user_edit' user.pk %}" method="get" style="float: left"> {% csrf_token %}
+                                <button class="btn btn-info btn-circle btn-sm ml-2"><i class="fas fa-edit"></i></button>
+                            </form>
+                            <form action="{% url 'user_delete' user.pk %}" method="post" style="float: left">
+                                {% csrf_token %}
+                                <button class="btn btn-danger btn-circle btn-sm ml-2" onclick="return confirm('Are you sure?');"><i class="fas fa-trash "></i></button>
+                            </form>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

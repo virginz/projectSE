@@ -1,0 +1,45 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="card border-left-primary">
+    <div class="card-header">
+        <h3>
+            Modifica utente
+        </h3>
+    </div>
+    <div class="card-body">
+        <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+                <div class="form-group">
+                    <form method="post">
+                        <div class="text-left">
+                            <label class="control-label"> Username </label>
+                            <div>{{ form.username}}</div>
+                            <br>
+                            <label class="control-label"> Email </label>
+                            <div>{{ form.email }}</div>
+                            <br>
+                            <label class="control-label"> Password </label>
+                            <div>{{ form.password }}</div>
+                            <br>
+                            <label class="control-label"> Descrizione </label>
+                            <div>{{ form.profile.user_type }}</div>
+                            <br>
+                            <!--    <div>
+                                <select class="form-control" name="selSupervisor" , multiple, data-live-search>
+                                        {% for value, text in form.supervisor.field.choices %}
+                                        <option  value="{{value.pk}}">{{ text }}</option>
+                                        {% endfor %}
+                                 </select>
+                            </div>-->
+                            <br>
+                        </div>
+                        {% csrf_token %}
+                        <button class='btn btn-primary' type="submit" style="float:right;">Salva</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

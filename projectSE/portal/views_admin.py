@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
 import csv, io
 from .models import Profile
+from django.urls import reverse_lazy
 
 class AdminCheck(UserPassesTestMixin):
     def test_func(self):
@@ -70,3 +71,38 @@ def create_user(request):
                             'num_user': num_user
                             }
                 return render(request, template, context)
+
+class UserDeleteView(AdminCheck, generic.DeleteView):
+    model = User
+    success_url = reverse_lazy('systemadministrator_home')
+
+class OwnerMixin(object):
+
+    def get_queryset(self):
+        return super().get_queryset().order_by('username')
+
+class OwnerEditMixin(object):
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user.profile
+        return super().form_valid(form)
+
+class OwnerUserMixin(OwnerMixin):
+    model = User
+    fields = [
+        'username',
+        'email',
+        'password',
+    ]
+
+    success_url = reverse_lazy('systemadministrator_home')
+
+class OwnerUserEditMixin(OwnerEditMixin, OwnerUserMixin):
+    template_name = 'portal/admin/modify_form.html'
+
+class UserEditView(OwnerUserEditMixin, AdminCheck, generic.UpdateView):
+    fields = [
+        'username',
+        'email',
+        'password',
+    ]
