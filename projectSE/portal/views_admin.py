@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMi
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
 import csv, io
-from .models import Profile
+from .models import Profile, Procedure
 from django.urls import reverse_lazy
 
 class AdminCheck(UserPassesTestMixin):
@@ -49,7 +49,6 @@ def create_user(request):
                 num_user = 0
                 new_users= []
                 for column in csv.reader(io_string, delimiter=',', quotechar="|"):
-                    print('ciao')
                     user, created = User.objects.update_or_create(
                         username=column[0],
                         email=column[0],
@@ -57,7 +56,6 @@ def create_user(request):
                         first_name=column[3],
                          
                     )
-                    print('ciao' + column[1])
                     if created:
                         user.is_active = True
                         user.set_password(column[1])

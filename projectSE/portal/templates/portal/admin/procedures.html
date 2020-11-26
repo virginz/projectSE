@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block content %}
+<div class="card shadow mb-4">
+    <div class="card-header">
+        <h5 class="font-weight-normal text-primary">Lista utenti</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <th>Procedura ⇵</th>
+                    <th>Descrizione ⇵</th>
+                    <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for procedure in procedure_list %}
+
+                    <tr>
+                        <td>{{ procedure.procedureName}}</td>
+                        <td>{{ procedure.procedureDescription}}</td>
+                        <td>
+                            <form action="{% url 'procedure_edit' procedure.pk %}" method="get" style="float: left"> {% csrf_token %}
+                                <button class="btn btn-info btn-circle btn-sm ml-2"><i class="fas fa-edit"></i></button>
+                            </form>
+                            <form action="{% url 'procedure_delete' procedure.pk %}" method="post" style="float: left">
+                                {% csrf_token %}
+                                <button class="btn btn-danger btn-circle btn-sm ml-2" onclick="return confirm('Are you sure?');"><i class="fas fa-trash "></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

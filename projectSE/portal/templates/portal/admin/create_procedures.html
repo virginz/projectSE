@@ -2,45 +2,40 @@
 
 <div class="card border-left-primary">
     <div class="card-header">
-        <h5>Caricamento Nuovi Utenti</h5>
+        <h5>Caricamento Nuove Procedure di Manutenzione</h5>
     </div>
     <div class="card-body">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %} {{ order }} <br>
-            <input class="btn btn-primary" type="file" name="file"><br><br>
-            <label class="form-group mt-2"> Seleziona la Tipologia di Utente da Caricare: </label>
-            <select class="form-control" name="usertype" id="id_usertype">
-                    <option value="SystemAdministrator">System administrator</option>
-                    <option value="Planner">Planner</option>
-                    <option value="Maintainer">Maintainer</option>
-                </select><br>
+            <input class="btn btn-primary" type="file" name="file"><br>
+
             <button class='btn btn-primary btn-sm mt-3' type="submit" style="float: left">Carica</button>
         </form>
     </div>
     <div class="card-body">
-        {% if new_users %}
+        {% if new_procedures %}
         <form action="{% url 'systemadministrator_home' %}">
             {% csrf_token %}
             <div class="card shadow mb-4">
                 <div class="card-header">
-                    <h5 class="font-weight-normal text-primary">Lista nuovi utenti</h5>
+                    <h5 class="font-weight-normal text-primary">Lista nuove Procedure di Manutenzione</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped" id="" width="100%" cellspacing="0">
                             <thead>
                                 <th><input type="checkbox" onClick="toggle(this)" checked /></th>
-                                <th>Email</th>
-                                <th>Nome</th>
+                                <th>Procedura</th>
+                                <th>Descrizione</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                {% for u in new_users %}
+                                {% for p in new_procedures %}
                                 <tr>
-                                    <td><input type="checkbox" name="user" id={{u.pk}} value={{u.pk}} checked></td>
-                                    <td>{{u.email}}</td>
-                                    <td>{{u.last_name}} {{u.first_name}}</td>
+                                    <td><input type="checkbox" name="user" id={{p.pk}} value={{p.pk}} checked></td>
+                                    <td>{{p.procedureName}}</td>
+                                    <td>{{p.procedureDescription}}</td>
                                 </tr>
                                 {% endfor %}
 
