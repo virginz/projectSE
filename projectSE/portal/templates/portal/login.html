@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Portale tesi - Mivia Lab</title>
+    <title>Smart Maintenance App</title>
 
     <!-- Custom fonts for this template-->
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
@@ -38,16 +38,16 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Portale Tesi</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Smart Maintenance App</h1>
                                     </div>
                                     <div class="text-center">
-                                        <h1 class="h3 text-gray-600 mb-4 ">Log-in</h1>
+                                        <h1 class="h3 text-gray-600 mb-4 ">Login</h1>
                                     </div>
 
                                     {% if error %}
                                     <p>{{ error }}</p>
                                     {% else %}
-                                    <p>Usa il seguente form per effettuare il login:</p>
+                                    <p></p>
                                     {% endif %}
 
                                     <div class="form-group">
@@ -56,7 +56,6 @@
                                             <input type="hidden" name="next" value="{{ next }}" />
                                             <p><input class='btn btn-primary btn-user btn-block' type="submit" value="Log-in"></p>
                                         </form>
-                                        <p><a href="/password_reset/">Hai dimenticato la password??</a></p>
                                     </div>
 
                                 </div>
