@@ -38,14 +38,19 @@ def create_procedure(request):
                 io_string = io.StringIO(data_set)
                 num_procedure = 0
                 new_procedures = []
+                    
                 for column in csv.reader(io_string, delimiter=',', quotechar="|"):
-                    procedure, created = Procedure.objects.update_or_create(
-                        procedureName=column[0],
-                        procedureDescription=column[1],
-                    )
-                    if created:
-                        num_procedure = num_procedure+1
-                        new_procedures.append(procedure)
+                    try:
+
+                        procedure, created = Procedure.objects.update_or_create(
+                            procedureName=column[0],
+                            procedureDescription=column[1],
+                        )
+                        if created:
+                            num_procedure = num_procedure+1
+                            new_procedures.append(procedure)
+                    except:
+                        pass
 
 
                 context = { 'new_procedures': new_procedures,

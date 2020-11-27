@@ -23,7 +23,7 @@ class Profile(models.Model):
         return (self.user.last_name + ' ' + self.user.first_name)
 
 class Procedure(models.Model):
-    procedureName = models.CharField(max_length=30)
+    procedureName = models.CharField(max_length=30, unique = True)
     procedureDescription = models.TextField()
 
     def __str__(self):

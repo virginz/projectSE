@@ -29,7 +29,6 @@
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped" id="" width="100%" cellspacing="0">
                             <thead>
-                                <th><input type="checkbox" onClick="toggle(this)" checked /></th>
                                 <th>Email</th>
                                 <th>Nome</th>
                                 </tr>
@@ -38,7 +37,6 @@
 
                                 {% for u in new_users %}
                                 <tr>
-                                    <td><input type="checkbox" name="user" id={{u.pk}} value={{u.pk}} checked></td>
                                     <td>{{u.email}}</td>
                                     <td>{{u.last_name}} {{u.first_name}}</td>
                                 </tr>
@@ -46,7 +44,7 @@
 
                             </tbody>
                         </table>
-                        <button class='btn btn-primary btn-sm mt-3' type="submit" style="float: right">Salva
+                        <button class='btn btn-primary btn-sm mt-3' type="submit" style="float: right">Indietro
                                     </button>
                     </div>
                 </div>
@@ -56,14 +54,5 @@
         {% endif %}
     </div>
 </div>
-
-<script>
-    function toggle(source) {
-        checkboxes = document.getElementsByName('user');
-        for (var i = 0, n = checkboxes.length; i < n; i++) {
-            checkboxes[i].checked = source.checked;
-        }
-    }
-</script>
 
 {% endblock %}
