@@ -39,19 +39,25 @@ def create_procedure(request):
                 num_procedure = 0
                 new_procedures = []
                 for column in csv.reader(io_string, delimiter=',', quotechar="|"):
-                    procedure, created = Procedure.objects.update_or_create(
-                        procedureName=column[0],
-                        procedureDescription=column[1],
-                    )
-                    if created:
-                        num_procedure = num_procedure+1
-                        new_procedures.append(procedure)
-
-
-                context = { 'new_procedures': new_procedures,
-                            'num_procedure': num_procedure
-                            }
-                return render(request, template, context)
+                    try:
+                        procedure, created = Procedure.objects.update_or_create(
+                            procedureName=column[0],
+                            procedureDescription=column[1],
+                        )
+                        if created:
+                            num_procedure = num_procedure+1
+                            new_procedures.append(procedure)
+                    except:
+                        pass
+                if num_procedure== 0:
+                    print(num_procedure)
+                    prompt = {'order': 'Procedure già presenti del Database.'}
+                    return render(request, template, prompt)
+                else:
+                    context = { 'new_procedures': new_procedures,
+                                'num_procedure': num_procedure
+                                }
+                    return render(request, template, context)
 
 class ProcedureDeleteView(AdminCheck, generic.DeleteView):
     model = Procedure
