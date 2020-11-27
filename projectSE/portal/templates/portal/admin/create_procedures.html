@@ -14,7 +14,7 @@
     </div>
     <div class="card-body">
         {% if new_procedures %}
-        <form action="{% url 'systemadministrator_home' %}">
+        <form action="{% url 'systemadministrator_procedures' %}">
             {% csrf_token %}
             <div class="card shadow mb-4">
                 <div class="card-header">
@@ -24,7 +24,6 @@
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped" id="" width="100%" cellspacing="0">
                             <thead>
-                                <th><input type="checkbox" onClick="toggle(this)" checked /></th>
                                 <th>Procedura</th>
                                 <th>Descrizione</th>
                                 </tr>
@@ -33,7 +32,6 @@
 
                                 {% for p in new_procedures %}
                                 <tr>
-                                    <td><input type="checkbox" name="user" id={{p.pk}} value={{p.pk}} checked></td>
                                     <td>{{p.procedureName}}</td>
                                     <td>{{p.procedureDescription}}</td>
                                 </tr>
@@ -41,7 +39,7 @@
 
                             </tbody>
                         </table>
-                        <button class='btn btn-primary btn-sm mt-3' type="submit" style="float: right">Salva
+                        <button class='btn btn-primary btn-sm mt-3' type="submit" style="float: right">Ritorna alla lista completa
                                     </button>
                     </div>
                 </div>
@@ -51,14 +49,5 @@
         {% endif %}
     </div>
 </div>
-
-<script>
-    function toggle(source) {
-        checkboxes = document.getElementsByName('user');
-        for (var i = 0, n = checkboxes.length; i < n; i++) {
-            checkboxes[i].checked = source.checked;
-        }
-    }
-</script>
 
 {% endblock %}
