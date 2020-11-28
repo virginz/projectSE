@@ -20,7 +20,7 @@ class Profile(models.Model):
     competences = models.ManyToManyField(Competence, blank=True, null=True)
     
     def __str__(self):
-        return (self.user.last_name + ' ' + self.user.first_name)
+        return (self.user.last_name + ' ' + self.user.first_name + ' ' + self.user_type)
 
 class Procedure(models.Model):
     procedureName = models.CharField(max_length=30, unique = True)
