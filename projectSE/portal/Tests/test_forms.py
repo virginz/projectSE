@@ -15,9 +15,9 @@ class TestForms(SimpleTestCase):
         self.assertFalse(form.is_valid())
         self.assertEquals(len(form.errors),2)
 
-"""     def test_login_form_valide_data(self):
+    def test_login_form_valide_data(self):
         form = LoginForm(data={
-            'username' : 'paoletto',
+            'username' : 'paolocolella@gmail.com',
             'password': 'ingegnere'
         })
-        self.assertTrue(form.is_valid()) """
+        self.assertTrue(form.is_valid())
