@@ -73,3 +73,30 @@ def create_user(request):
 class UserDeleteView(AdminCheck, generic.DeleteView):
     model = User
     success_url = reverse_lazy('systemadministrator_home')
+
+class OwnerMixin(object):
+
+    def get_queryset(self):
+        return super().get_queryset().order_by('date_joined')
+
+class OwnerUserMixin(OwnerMixin):
+    model = User
+    fields = [
+        'first_name',
+        'last_name',
+        'username',
+        'email'
+    ]
+
+    success_url = reverse_lazy('systemadministrator_home')
+
+class OwnerUserEditMixin(OwnerUserMixin):
+    template_name = 'portal/admin/modify_form.html'
+
+class UserEditView(OwnerUserEditMixin, AdminCheck, generic.UpdateView):
+    fields = [
+        'first_name',
+        'last_name',
+        'username',
+        'email'
+    ]

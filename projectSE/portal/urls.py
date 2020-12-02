@@ -14,4 +14,5 @@ urlpatterns = [
     path('admin/home/<int:pk>/edit-procedure/', login_required(admin_procedures.ProcedureEditView.as_view()), name='procedure_edit'),
     path('admin/home/<int:pk>/delete/', login_required(views_admin.UserDeleteView.as_view()), name='user_delete'),
     path('admin/home/<int:pk>/delete-procedure/', login_required(admin_procedures.ProcedureDeleteView.as_view()), name='procedure_delete'),
+    path('admin/home/<int:pk>/edit-user/', login_required(views_admin.UserEditView.as_view()), name='user_edit'),
 ]
