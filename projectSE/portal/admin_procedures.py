@@ -85,3 +85,8 @@ class ProcedureEditView(OwnerProcedureEditMixin, AdminCheck, generic.UpdateView)
         'procedureName',
         'procedureDescription',
     ]
+class ProcedureCreateView(OwnerProcedureEditMixin, AdminCheck, generic.CreateView):
+    fields = [
+        'procedureName',
+        'procedureDescription',
+    ]
