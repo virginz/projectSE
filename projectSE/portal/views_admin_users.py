@@ -1,5 +1,6 @@
 from django.views import generic
 from.views import user_login
+from  .forms import addSingleUserForm
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -69,6 +70,36 @@ def create_user(request):
                             'num_user': num_user
                             }
                 return render(request, template, context)
+
+@user_passes_test(admin_check)
+def create_single_user(request):
+    template = 'portal/admin/create_single_user.html'
+
+    if request.method == 'POST':
+        form = addSingleUserForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            email = cd['email']
+            usertype = cd['usertype']
+            first_name = cd['first_name']
+            last_name = cd['last_name']
+            password = cd['password']
+            user, created = User.objects.update_or_create(
+                username=email,
+                email=email,
+                last_name=last_name,
+                first_name=first_name,
+            )
+            if created:
+                user.is_active = True
+                user.set_password(password)
+                user.save()
+                profile, profilecreated = Profile.objects.update_or_create(user=user, user_type=usertype)
+                return redirect('systemadministrator_home')
+    else:
+        form = addSingleUserForm()
+        return render(request, template)
+
 
 class UserDeleteView(AdminCheck, generic.DeleteView):
     model = User

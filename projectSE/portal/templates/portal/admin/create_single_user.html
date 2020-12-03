@@ -1,0 +1,44 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="card border-left-primary">
+    <div class="card-header">
+        <h3>
+            Modifica Utente
+        </h3>
+    </div>
+    <div class="card-body">
+        <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+                <div class="form-group">
+                    <form enctype="multipart/form-data" method="post">
+                        <div class="text-left">
+                            <label class="control-label"> Nome </label><br>
+                            <input id="first_name" name="first_name" type="first_name" placeholder="Inserisci Nome" required>
+                            <br><br>
+                            <label class="control-label"> Cognome </label><br>
+                            <input id="last_name" name="last_name" type="last_name" placeholder="Inserisci Cognome" required>
+                            <br><br>
+                            <label class="control-label"> Email </label><br>
+                            <input id="email" name="email" type="email" placeholder="(test@esempio.com)" required>
+                            <br><br>
+                            <label class="control-label"> Password </label><br>
+                            <input id="password" name="password" type="password" placeholder="Inserisci password" minlenght="8" required>
+                            <br><br>
+                            <label class="form-group mt-2"> Seleziona la Tipologia di Utente da Caricare: </label>
+                            <select class="form-control" name="usertype" id="id_usertype">
+                                <option value="SystemAdministrator">System Administrator</option>
+                                <option value="Planner">Planner</option>
+                                <option value="Maintainer">Maintainer</option>
+                            </select><br>
+
+                        </div>
+                        {% csrf_token %}
+                        <button class='btn btn-primary' type="submit" style="float:right;">Salva</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

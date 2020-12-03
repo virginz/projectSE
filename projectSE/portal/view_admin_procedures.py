@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 import csv, io
 from .models import Procedure
 from django.urls import reverse_lazy
-from .views_admin import AdminCheck, admin_check
+from .views_admin_users import AdminCheck, admin_check
 
 class ProcedureView(generic.ListView):
     model = Procedure

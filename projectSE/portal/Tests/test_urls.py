@@ -1,8 +1,8 @@
 from django.test import SimpleTestCase
 from django.urls import resolve, reverse
 from ..views import user_login
-from ..views_admin import *
-from ..admin_procedures import *
+from ..views_admin_users import *
+from ..view_admin_procedures import *
 import re
 
 class TestUrls(SimpleTestCase):
