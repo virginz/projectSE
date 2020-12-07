@@ -1,5 +1,5 @@
 from django.urls import path, include
-from . import views, views_admin_users, view_admin_procedures
+from . import views, views_admin_users, view_admin_procedures, view_planner_activity
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
 
@@ -17,4 +17,6 @@ urlpatterns = [
     path('admin/home/<int:pk>/delete/', login_required(views_admin_users.UserDeleteView.as_view()), name='user_delete'),
     path('admin/home/<int:pk>/delete-procedure/', login_required(view_admin_procedures.ProcedureDeleteView.as_view()), name='procedure_delete'),
     path('admin/home/<int:pk>/edit-user/', login_required(views_admin_users.UserEditView.as_view()), name='user_edit'),
+    path('planner/home/', login_required(view_planner_activity.PlannerView.as_view()), name='planner_home'),
+
 ]

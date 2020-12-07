@@ -1,12 +1,11 @@
 from django.views import generic
-from.views import user_login
 from  .forms import addSingleUserForm
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
 import csv, io
-from .models import Profile, Procedure
+from .models import Profile
 from django.urls import reverse_lazy
 
 class AdminCheck(UserPassesTestMixin):

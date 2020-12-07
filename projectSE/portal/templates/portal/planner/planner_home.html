@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% block content %}
+<div class="card shadow mb-4">
+    <div class="card-header">
+        <h5 class="font-weight-normal text-primary">Lista utenti</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <th>Week ⇵</th>
+                    <th>ID ⇵</th>
+                    <th>Area ⇵</th>
+                    <th>Tipologia ⇵</th>
+                    <th>Tempo di Intervento Stimato ⇵</th>
+                    <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for activity in activity_list %}
+
+                    <tr>
+                        <td>{{ activity.week}}</td>
+                        <td>{{ activity.pk}}</td>
+                        <td>{{ activity.factory_site}} - {{ activity.factory_area}}</td>
+                        <td>{{ activity.activity_typology}}</td>
+                        <td>{{ activity.estimation_time}}</td>
+                        <td></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

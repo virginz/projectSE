@@ -1,5 +1,4 @@
 from django.views import generic
-from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
 import csv, io
