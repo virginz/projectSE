@@ -37,4 +37,3 @@ def user_login(request):
     else:
         form = LoginForm()
     return render(request, 'portal/login.html', {'form':form})
-    

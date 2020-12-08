@@ -5,9 +5,17 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
+            <form method="POST" enctype="multipart/form-data">
+                <select class="form-control" id="week" name="week" style="width: 8%"><br>
+                    <option value="1">Week 1</option>
+                    <option value="2">Week 2</option>
+                    <option value="3">Week 3</option>
+                </select>
+                <button class='btn btn-primary' type="submit" style="position: absolute; top: 16%; left: 10%">Cerca</button>
+            </form>
+            <br>
             <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                 <thead>
-                    <th>Week ⇵</th>
                     <th>ID ⇵</th>
                     <th>Area ⇵</th>
                     <th>Tipologia ⇵</th>
@@ -19,7 +27,6 @@
                     {% for activity in activity_list %}
 
                     <tr>
-                        <td>{{ activity.week}}</td>
                         <td>{{ activity.pk}}</td>
                         <td>{{ activity.factory_site}} - {{ activity.factory_area}}</td>
                         <td>{{ activity.activity_typology}}</td>

@@ -8,7 +8,9 @@ class LoginForm(forms.Form):
 class addSingleUserForm(forms.Form):
  email = forms.EmailField()
  password = forms.CharField(min_length=8, widget=forms.PasswordInput)
- first_name= forms.CharField()
- last_name= forms.CharField()
- usertype= forms.CharField()
+ first_name = forms.CharField()
+ last_name = forms.CharField()
+ usertype = forms.CharField()
 
+class selectWeek(forms.Form):
+ week = forms.IntegerField()

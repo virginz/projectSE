@@ -14,9 +14,10 @@ urlpatterns = [
     path('admin/home/add-procedures/', view_admin_procedures.create_procedure, name='add_procedure'),
     path('admin/home/add-procedure/', login_required(view_admin_procedures.ProcedureCreateView.as_view()), name='add_one_procedure'),
     path('admin/home/<int:pk>/edit-procedure/', login_required(view_admin_procedures.ProcedureEditView.as_view()), name='procedure_edit'),
-    path('admin/home/<int:pk>/delete/', login_required(views_admin_users.UserDeleteView.as_view()), name='user_delete'),
+    path('admin/home/<int:pk>/delete-user/', login_required(views_admin_users.UserDeleteView.as_view()), name='user_delete'),
     path('admin/home/<int:pk>/delete-procedure/', login_required(view_admin_procedures.ProcedureDeleteView.as_view()), name='procedure_delete'),
     path('admin/home/<int:pk>/edit-user/', login_required(views_admin_users.UserEditView.as_view()), name='user_edit'),
     path('planner/home/', login_required(view_planner_activity.PlannerView.as_view()), name='planner_home'),
+    path('planner/home/week<week>', login_required(view_planner_activity.PlannerView.as_view()), name='planner_home'),
 
 ]

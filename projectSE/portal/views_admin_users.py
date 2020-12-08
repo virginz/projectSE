@@ -21,7 +21,7 @@ class AdminView(AdminCheck, generic.ListView):
     context_object_name = 'user_list'
 
     def get_queryset(self):
-        return super().get_queryset().order_by('username').exclude(is_superuser=True)
+        return super().get_queryset().order_by('username').exclude(username=self.request.user.profile.user.username).exclude(is_superuser=True)
 
 @user_passes_test(admin_check)
 def create_user(request):

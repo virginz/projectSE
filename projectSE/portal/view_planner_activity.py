@@ -1,4 +1,6 @@
 from django.views import generic
+from django.shortcuts import get_object_or_404
+from  .forms import selectWeek
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -21,7 +23,7 @@ class PlannerView(PlannerCheck, generic.ListView):
 
     def get_queryset(self):
         return super().get_queryset().order_by('pk')
-
-#@user_passes_test(planner_check)
-#def week_number(self):
+    '''def get_queryset(self):
+        self.activity = get_object_or_404(Activity, name=self.kwargs['week'])
+        return Activity.objects.filter(week=self.activity)'''
 
