@@ -1,11 +1,11 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base_planner.html' %} {% block content %}
 <div class="card shadow mb-4">
     <div class="card-header">
-        <h5 class="font-weight-normal text-primary">Lista Attività</h5>
+        <h5 class="font-weight-normal text-primary">Lista attività</h5>
     </div>
     <div class="card-body">
         <div class="table-responsive">
-           <!-- <form method="POST" enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data">
                 <select class="form-control" id="week" name="week" style="width: 8%"><br>
                     <option value="1">Week 1</option>
                     <option value="2">Week 2</option>
@@ -13,7 +13,7 @@
                 </select>
                 <button class='btn btn-primary' type="submit" style="position: absolute; top: 16%; left: 10%">Cerca</button>
             </form>
-            <br>-->
+            <br>
             <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <th>ID ⇵</th>
