@@ -1,5 +1,5 @@
 from django.test import SimpleTestCase
-from portal.forms import LoginForm
+from ..forms import LoginForm
 
 class TestForms(SimpleTestCase):
 

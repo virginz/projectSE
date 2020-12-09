@@ -1,5 +1,5 @@
 from django.test import TestCase
-from portal.models import Competence, Profile, Procedure
+from ..models import Competence, Profile, Procedure
 from django.contrib.auth.models import User
 
 class TestModels(TestCase):
