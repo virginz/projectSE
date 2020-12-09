@@ -5,14 +5,13 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <form method="POST" enctype="multipart/form-data">
-                <select class="form-control" id="week" name="week" style="width: 8%"><br>
-                    <option value="1">Week 1</option>
-                    <option value="2">Week 2</option>
-                    <option value="3">Week 3</option>
-                </select>
-                <button class='btn btn-primary' type="submit" style="position: absolute; top: 16%; left: 10%">Cerca</button>
-            </form>
+            <select onchange="javascript:location.href = this.value;" class="form-control" id="week" name="week" style="width:13%"><br>
+                <option selected disabled>Seleziona Settimana</option>
+                <option value="?week=1">Week 1</option>
+                <option value="?week=2">Week 2</option>
+                <option value="?week=3">Week 3</option>
+                <option value="?week=all">Mostra Tutte</option>
+            </select>
             <br>
             <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                 <thead>

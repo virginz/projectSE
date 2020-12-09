@@ -22,11 +22,23 @@ class PlannerView(PlannerCheck, generic.ListView):
     context_object_name = 'activity_list'
 
     def get_queryset(self):
-        return super().get_queryset().order_by('pk')
-    '''def get_queryset(self):
+        week = self.request.GET.get('week')
+        if week == "all" or week == None:
+            return super().get_queryset().order_by('pk')
+        else:
+            return super().get_queryset().order_by('pk').filter(week=week)
 
-        self.activity = get_object_or_404(Activity, name=self.kwargs['week'])
-        return Activity.objects.filter(week=self.week)'''
+@user_passes_test(planner_check)
+def select_week(request):
+    if request.method == 'POST':
+        form = selectWeek(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            week = cd['week']
+            return redirect('planner/home?week=' + str(week))
+    else:
+        form = selectWeek()
+        return redirect('planner_home')
 
 class OwnerMixin(object):
 
