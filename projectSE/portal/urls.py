@@ -21,4 +21,5 @@ urlpatterns = [
     path('planner/home/week<week>', login_required(view_planner_activity.PlannerView.as_view()), name='planner_home'),
     path('planner/home/add-activity/', login_required(view_planner_activity.ActivityCreateView.as_view()), name='add_activity'),
     path('planner/home/<int:pk>/delete-activity/', login_required(view_planner_activity.PlannerDeleteView.as_view()), name='activity_delete'),
+    path('planner/home/<int:pk>/edit-activity/', login_required(view_planner_activity.ActivityEditView.as_view()), name='activity_edit'),
 ]

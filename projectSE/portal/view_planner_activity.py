@@ -71,3 +71,20 @@ class ActivityCreateView(OwnerActivityEditMixin, PlannerCheck, generic.CreateVie
 class PlannerDeleteView(PlannerCheck, generic.DeleteView):
     model = Activity
     success_url = reverse_lazy('planner_home')
+
+class OwnerActivityEditMixin(OwnerActivityMixin):
+    template_name = 'portal/planner/modify_activity.html'
+
+class ActivityEditView(OwnerActivityEditMixin, PlannerCheck, generic.UpdateView):
+    fields = [
+        'activity_type',
+        'factory_site',
+        'factory_area',
+        'activity_typology',
+        'activity_description',
+        'estimation_time',
+        'interruptible',
+        'materials',
+        'week',
+        'workspace_notes',
+    ]
