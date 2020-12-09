@@ -27,3 +27,42 @@ class PlannerView(PlannerCheck, generic.ListView):
         self.activity = get_object_or_404(Activity, name=self.kwargs['week'])
         return Activity.objects.filter(week=self.activity)'''
 
+class OwnerMixin(object):
+
+    def get_queryset(self):
+        return super().get_queryset().order_by('pk')
+
+class OwnerActivityMixin(OwnerMixin):
+    model = Activity
+    fields = [
+        'activity_type',
+        'factory_site',
+        'factory_area',
+        'activity_typology',
+        'activity_description',
+        'estimation_time',
+        'interruptible',
+        'materials',
+        'week',
+        'workspace_notes',
+    ]
+
+    success_url = reverse_lazy('planner_home')
+
+class OwnerActivityEditMixin(OwnerActivityMixin):
+    template_name = 'portal/planner/create_activity.html'
+
+
+class ActivityCreateView(OwnerActivityEditMixin, PlannerCheck, generic.CreateView):
+    fields = [
+        'activity_type',
+        'factory_site',
+        'factory_area',
+        'activity_typology',
+        'activity_description',
+        'estimation_time',
+        'interruptible',
+        'materials',
+        'week',
+        'workspace_notes',
+    ]
