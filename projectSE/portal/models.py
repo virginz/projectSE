@@ -53,3 +53,17 @@ class Activity(models.Model):
 
     def __str__(self):
         return(str(self.pk) + ' ' + self.activity_type + ' ' + self.activity_typology)
+
+class Availability(models.Model):
+    maintainer = models.ForeignKey(Profile, on_delete=models.CASCADE, limit_choices_to={'user_type':'Maintainer'})
+    slot8_9 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
+    slot9_10 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
+    slot10_11 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
+    slot11_12 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
+    slot14_15 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
+    slot15_16 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
+    slot16_17 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
+    day = models.DateField()
+
+    def __str__(self):
+        return(str(self.maintainer) + ' ' + str(self.day))

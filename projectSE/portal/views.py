@@ -20,7 +20,6 @@ def user_login(request):
                     if (user.profile.user_type == 'Maintainer'):
                         return redirect('maintainer_home')
                 else:
-
                     form = LoginForm()
                     context = {
                         'form' : form,

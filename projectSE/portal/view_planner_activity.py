@@ -24,6 +24,7 @@ class PlannerView(PlannerCheck, generic.ListView):
     def get_queryset(self):
         return super().get_queryset().order_by('pk')
     '''def get_queryset(self):
+
         self.activity = get_object_or_404(Activity, name=self.kwargs['week'])
-        return Activity.objects.filter(week=self.activity)'''
+        return Activity.objects.filter(week=self.week)'''
 
