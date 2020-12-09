@@ -67,3 +67,7 @@ class ActivityCreateView(OwnerActivityEditMixin, PlannerCheck, generic.CreateVie
         'week',
         'workspace_notes',
     ]
+
+class PlannerDeleteView(PlannerCheck, generic.DeleteView):
+    model = Activity
+    success_url = reverse_lazy('planner_home')
