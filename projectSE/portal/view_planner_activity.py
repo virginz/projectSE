@@ -41,7 +41,7 @@ def select_week(request):
         return redirect('planner_home')
 
 class OwnerMixin(object):
-
+    
     def get_queryset(self):
         return super().get_queryset().order_by('pk')
 
@@ -64,6 +64,7 @@ class OwnerActivityMixin(OwnerMixin):
 
 class OwnerActivityEditMixin(OwnerActivityMixin):
     template_name = 'portal/planner/create_activity.html'
+    
 
 
 class ActivityCreateView(OwnerActivityEditMixin, PlannerCheck, generic.CreateView):
@@ -98,5 +99,33 @@ class ActivityEditView(OwnerActivityEditMixin, PlannerCheck, generic.UpdateView)
         'interruptible',
         'materials',
         'week',
+        'workspace_notes',
+    ]
+
+class OwnerVerifyActivityMixin(object):
+    context_object_name = 'view_information'
+
+    def get_queryset(self):
+        return super().get_queryset().order_by('pk')
+    
+    model = Activity
+    fields = [
+        'activity_type',
+        'factory_site',
+        'factory_area',
+        'activity_typology',
+        'activity_description',
+        'estimation_time',
+        'interruptible',
+        'materials',
+        'week',
+        'workspace_notes',
+    ]
+
+    success_url = reverse_lazy('planner_home')
+    template_name = 'portal/planner/verify_information_activity.html'
+
+class VerifyActivityView(OwnerVerifyActivityMixin, PlannerCheck, generic.UpdateView):
+    fields = [
         'workspace_notes',
     ]

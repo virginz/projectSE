@@ -22,4 +22,5 @@ urlpatterns = [
     path('planner/home/add-activity/', login_required(view_planner_activity.ActivityCreateView.as_view()), name='add_activity'),
     path('planner/home/<int:pk>/delete-activity/', login_required(view_planner_activity.PlannerDeleteView.as_view()), name='activity_delete'),
     path('planner/home/<int:pk>/edit-activity/', login_required(view_planner_activity.ActivityEditView.as_view()), name='activity_edit'),
+    path('planner/home/<int:pk>/verify-information-activity/', login_required(view_planner_activity.VerifyActivityView.as_view()), name='verify_activity'),
 ]

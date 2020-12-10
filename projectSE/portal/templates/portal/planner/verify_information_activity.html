@@ -1,0 +1,57 @@
+{% extends "base_planner.html" %} {% block content %}
+
+<div class="card border-left-primary">
+    <div class="card-header">
+        <h3>
+            Verifica Attività
+        </h3>
+    </div>
+    <div class="card-body">
+        <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+                <div class="form-group">
+                    <form method="post">
+                        <div class="text-left">
+                            <b><label class="control-label"> Tipo di Attività  </label></b>
+                            <div>{{ view_information.activity_type}}</div>
+                            <br>
+                            <b><label class="control-label">Sito</label></b>
+                            <div>{{ view_information.factory_site }}</div>
+                            </b>
+                            <br>
+                            <b><label class="control-label">Area</label></b>
+                            <div>{{ view_information.factory_area }}</div>
+                            <br>
+                            <b><label class="control-label">Tipologia Attività</label></b>
+                            <div>{{ view_information.activity_typology }}</div>
+                            <br>
+                            <b><label class="control-label">Descrizione</label></b>
+                            <div>{{ view_information.activity_description }}</div>
+                            <br>
+                            <b><label class="control-label">Tempo Stimato</label></b>
+                            <div>{{ view_information.estimation_time }}</div>
+                            <br>
+                            <b><label class="control-label">Interrompibile</label></b>{% if view_information.interruptible == False %}
+                            <div>No</div>{% else %}
+                            <div>Si</div>{% endif %}
+                            <br>
+                            <b><label class="control-label">Materiali</label></b>
+                            <div>{{ view_information.materials}}</div>
+                            <br>
+                            <b><label class="control-label">Settimana</label></b>
+                            <div>{{ view_information.week}}</div>
+                            <br>
+                            <b><label class="control-label">Workspace Notes</label></b>
+                            <div>{{ form.workspace_notes}}</div>
+                            <br>
+                        </div>
+                        {% csrf_token %}
+                        <button class='btn btn-primary' type="submit" style="float:right;">Prosegui</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
