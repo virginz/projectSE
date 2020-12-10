@@ -1,5 +1,9 @@
 {% extends "base_planner.html" %} {% block content %}
-
+<style>
+    textarea {
+        resize: none;
+    }
+</style>
 <div class="card border-left-primary">
     <div class="card-header">
         <h3>
@@ -15,39 +19,33 @@
                             <b><label class="control-label"> Tipo di Attività  </label></b>
                             <div>{{ view_information.activity_type}}</div>
                             <br>
-                            <b><label class="control-label">Sito</label></b>
-                            <div>{{ view_information.factory_site }}</div>
-                            </b>
+                            <div style="position: absolute; top: 0%; right: 25%"><b><label class="control-label">Sito</label></b><br>
+                            {{ view_information.factory_site }}</div>
+                            <div style="position: absolute; top: 0%; right: 13%"><b><label class="control-label">Area</label></b><br>
+                            {{ view_information.factory_area }}</div>
+                            <div style="position: absolute; top: 0%; left: 14%"><b><label class="control-label">Tipologia Attività</label></b><br>
+                            {{ view_information.activity_typology }}</div>
+                            <div><b><label class="control-label">Descrizione</label></b><br>
+                            {{ view_information.activity_description }}</div>
+                            <div style="position: absolute; top: 0%; left: 52%"><b><label class="control-label">Tempo Stimato:&nbsp</label></b>
+                            {{ view_information.estimation_time }} min.</div>
                             <br>
-                            <b><label class="control-label">Area</label></b>
-                            <div>{{ view_information.factory_area }}</div>
-                            <br>
-                            <b><label class="control-label">Tipologia Attività</label></b>
-                            <div>{{ view_information.activity_typology }}</div>
-                            <br>
-                            <b><label class="control-label">Descrizione</label></b>
-                            <div>{{ view_information.activity_description }}</div>
-                            <br>
-                            <b><label class="control-label">Tempo Stimato</label></b>
-                            <div>{{ view_information.estimation_time }}</div>
-                            <br>
-                            <b><label class="control-label">Interrompibile</label></b>{% if view_information.interruptible == False %}
-                            <div>No</div>{% else %}
-                            <div>Si</div>{% endif %}
-                            <br>
+                            <div style="position: absolute; top: 0%; left: 39%"><b><label class="control-label">Interrompibile:&nbsp</label></b>
+                            <input type="checkbox" {% if view_information.interruptible != False %} checked {% endif %} onclick="return false;" />
+                            <br></div>
                             <b><label class="control-label">Materiali</label></b>
                             <div>{{ view_information.materials}}</div>
                             <br>
-                            <b><label class="control-label">Settimana</label></b>
-                            <div>{{ view_information.week}}</div>
-                            <br>
-                            <b><label class="control-label">Workspace Notes</label></b>
+                            <div style="position: absolute; top: 0%; left: 28%"><b><label class="control-label">Settimana:&nbsp</label></b>
+                            {{ view_information.week}}</div>
+                            <b><label class="control-label" >Workspace Notes</label></b>
                             <div>{{ form.workspace_notes}}</div>
                             <br>
                         </div>
                         {% csrf_token %}
                         <button class='btn btn-primary' type="submit" style="float:right;">Prosegui</button>
                     </form>
+                    <button class='btn btn-primary' type="submit" style="float:left;" onclick="window.location='../../'">Torna alla lista completa</button>
                 </div>
             </div>
         </div>
