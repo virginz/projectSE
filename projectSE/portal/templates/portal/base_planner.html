@@ -23,8 +23,22 @@
     <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet"> {% block stylesheets %} {% endblock %}
 
 </head>
+<script>
+function myFunction() {
+  document.getElementById("demo").innerHTML = {{ view_information.estimation_time }} - 3;
+}
 
-<body id="page-top">
+function iterWeek() {
+    var x = 0;
+    var str = "";
+    for (x = 1; x < 53; x++){
+        str = str + "<option value=\"?week=" + x + ">" + x + "</option>";
+        alert(str);
+    }
+    document.getElementById("selectWeek").innerHTML = "<option selected disabled>Seleziona Settimana</option>" + str + "<option value=\"?week=all\">Mostra Tutte</option>";
+}
+</script>
+<body id="page-top" onload="iterWeek()">
 
     <!-- Page Wrapper -->
     <div id="wrapper">

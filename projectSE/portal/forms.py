@@ -14,3 +14,4 @@ class addSingleUserForm(forms.Form):
 
 class selectWeek(forms.Form):
  week = forms.IntegerField()
+

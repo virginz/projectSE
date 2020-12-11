@@ -129,3 +129,4 @@ class VerifyActivityView(OwnerVerifyActivityMixin, PlannerCheck, generic.UpdateV
     fields = [
         'workspace_notes',
     ]
+

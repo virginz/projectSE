@@ -4,7 +4,8 @@
         resize: none;
     }
 </style>
-<div class="card border-left-primary">
+
+<div class="card border-left-primary" >
     <div class="card-header">
         <h3>
             Verifica Attività
@@ -31,7 +32,7 @@
                             {{ view_information.estimation_time }} min.</div>
                             <br>
                             <div style="position: absolute; top: 0%; left: 39%"><b><label class="control-label">Interrompibile:&nbsp</label></b>
-                            <input type="checkbox" {% if view_information.interruptible != False %} checked {% endif %} onclick="return false;" />
+                            <input type="checkbox" {% if view_information.interruptible %} checked {% endif %} onclick="return false;" />
                             <br></div>
                             <b><label class="control-label">Materiali</label></b>
                             <div>{{ view_information.materials}}</div>
@@ -43,9 +44,9 @@
                             <br>
                         </div>
                         {% csrf_token %}
-                        <button class='btn btn-primary' type="submit" style="float:right;">Prosegui</button>
+                        <button class='btn btn-primary' type="submit" style="float:right;" >Prosegui</button>
                     </form>
-                    <button class='btn btn-primary' type="submit" style="float:left;" onclick="window.location='../../'">Torna alla lista completa</button>
+                    <button class='btn btn-primary' type="submit" style="float:left;" onclick="window.location='../../?week={{ view_information.week}}'">Torna alla lista completa</button>
                 </div>
             </div>
         </div>
