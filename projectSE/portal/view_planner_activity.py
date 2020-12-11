@@ -122,8 +122,9 @@ class OwnerVerifyActivityMixin(object):
         'workspace_notes',
     ]
 
-    success_url = reverse_lazy('planner_home')
     template_name = 'portal/planner/verify_information_activity.html'
+    #success_url = reverse()
+    
 
 class VerifyActivityView(OwnerVerifyActivityMixin, PlannerCheck, generic.UpdateView):
     fields = [
