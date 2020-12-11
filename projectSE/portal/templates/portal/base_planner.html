@@ -24,20 +24,41 @@
 
 </head>
 <script>
-function myFunction() {
-  document.getElementById("demo").innerHTML = {{ view_information.estimation_time }} - 3;
-}
-
-function iterWeek() {
-    var x = 0;
-    var str = "";
-    for (x = 1; x < 53; x++){
-        str = str + "<option value=\"?week=" + x + "\">Week " + x + "</option>";
+    function percentageForDay() {
+        var somma = {
+            {
+                availability.slot8_9
+            }
+        } + {
+            {
+                availability.slot9_10
+            }
+        } + {
+            {
+                availability.slot10_11
+            }
+        } + {
+            {
+                availability.slot11_12
+            }
+        } + {
+            {
+                availability.slot14_15
+            }
+        } + {
+            {
+                availability.slot15_16
+            }
+        } + {
+            {
+                availability.slot16_17
+            }
+        };
+        document.getElementById("perforday").innerHTML = somma / 7;
     }
-    document.getElementById("selectWeek").innerHTML = "<option selected disabled>Seleziona Settimana</option>" + str + "<option value=\"?week=all\">Mostra Tutte</option>";
-}
 </script>
-<body id="page-top" onload="iterWeek()">
+
+<body id="page-top" onload="percentageForDay()">
 
     <!-- Page Wrapper -->
     <div id="wrapper">

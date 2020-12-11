@@ -9,6 +9,29 @@ class Procedure(models.Model):
     def __str__(self):
         return(self.procedureName + ' ' + self.procedureDescription)
 
+class Availability(models.Model):
+    slot8_9 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
+    slot9_10 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
+    slot10_11 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
+    slot11_12 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
+    slot14_15 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
+    slot15_16 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
+    slot16_17 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
+    day = models.CharField(max_length=20, choices = [
+        ('Lunedì', 'Lunedì'),
+        ('Martedì', 'Martedì'),
+        ('Mercoledì', 'Mercoledì'),
+        ('Giovedì', 'Giovedì'),
+        ('Venerdì', 'Venerdì'),
+        ('Sabato', 'Sabato'),
+        ('Domenica', 'Domenica'),
+    ])
+    week = models.IntegerField(default=1, validators=[MaxValueValidator(52), MinValueValidator(1)])
+
+    def __str__(self):
+
+        return('Disponibilità giorno ' + str(self.day))
+
 class Competence(models.Model):
     competenceName = models.CharField(max_length=30)
     listProcedure = models.ManyToManyField(Procedure, blank=True, null=True)
@@ -25,6 +48,7 @@ class Profile(models.Model):
         ('Maintainer', 'Maintainer'),
     ])
 
+    disponibilita = models.ManyToManyField(Availability, blank= True, null=True)
     competences = models.ManyToManyField(Competence, blank=True, null=True)
     
     def __str__(self):
@@ -51,28 +75,12 @@ class Activity(models.Model):
     week = models.IntegerField(default=1, validators=[MaxValueValidator(52), MinValueValidator(1)])
     workspace_notes = models.TextField(blank=True, null=True)
 
+    assigned_to = models.BooleanField(default=False)
+
     def __str__(self):
         return(str(self.pk) + ' ' + self.activity_type + ' ' + self.activity_typology)
 
-class Availability(models.Model):
-    maintainer = models.ForeignKey(Profile, on_delete=models.CASCADE, limit_choices_to={'user_type':'Maintainer'})
-    slot8_9 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
-    slot9_10 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
-    slot10_11 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
-    slot11_12 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
-    slot14_15 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
-    slot15_16 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
-    slot16_17 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
-    day = models.CharField(max_length=20, choices = [
-        ('Lunedì', 'Lunedì'),
-        ('Martedì', 'Martedì'),
-        ('Mercoledì', 'Mercoledì'),
-        ('Giovedì', 'Giovedì'),
-        ('Venerdì', 'Venerdì'),
-        ('Sabato', 'Sabato'),
-        ('Domenica', 'Domenica'),
-    ])
-    week = models.IntegerField(default=1, validators=[MaxValueValidator(52), MinValueValidator(1)])
-
-    def __str__(self):
-        return(str(self.maintainer) + ' ' + str(self.day))
+class Assignment(models.Model):
+    maintainer = models.ForeignKey(Profile, on_delete = models.CASCADE, limit_choices_to={'user_type': 'Maintainer'})
+    attivita = models.ForeignKey(Activity, on_delete = models.CASCADE, unique=True)
+   
