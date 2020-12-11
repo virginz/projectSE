@@ -2,9 +2,16 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+class Procedure(models.Model):
+    procedureName = models.CharField(max_length=30, unique = True)
+    procedureDescription = models.TextField()
+
+    def __str__(self):
+        return(self.procedureName + ' ' + self.procedureDescription)
+
 class Competence(models.Model):
     competenceName = models.CharField(max_length=30)
-    listTask = models.TextField()
+    listProcedure = models.ManyToManyField(Procedure, blank=True, null=True)
 
     def __str__(self):
         return(self.competenceName + ' ' + self.listTask)
@@ -22,13 +29,6 @@ class Profile(models.Model):
     
     def __str__(self):
         return (self.user.last_name + ' ' + self.user.first_name + ', ' + self.user_type)
-
-class Procedure(models.Model):
-    procedureName = models.CharField(max_length=30, unique = True)
-    procedureDescription = models.TextField()
-
-    def __str__(self):
-        return(self.procedureName + ' ' + self.procedureDescription)
 
 class Activity(models.Model):
     activity_type = models.CharField(max_length=20, choices = [
@@ -63,7 +63,16 @@ class Availability(models.Model):
     slot14_15 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
     slot15_16 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
     slot16_17 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
-    day = models.DateField()
+    day = models.CharField(max_length=20, choices = [
+        ('Lunedì', 'Lunedì'),
+        ('Martedì', 'Martedì'),
+        ('Mercoledì', 'Mercoledì'),
+        ('Giovedì', 'Giovedì'),
+        ('Venerdì', 'Venerdì'),
+        ('Sabato', 'Sabato'),
+        ('Domenica', 'Domenica'),
+    ])
+    week = models.IntegerField(default=1, validators=[MaxValueValidator(52), MinValueValidator(1)])
 
     def __str__(self):
         return(str(self.maintainer) + ' ' + str(self.day))
