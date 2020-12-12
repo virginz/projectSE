@@ -1,4 +1,9 @@
 {% extends 'base_planner.html' %} {% block content %}
+<script>
+    function setFormAction(){
+        var action_before = document.
+    }
+</script>
 <div class="card shadow mb-4">
     <div class="card-header">
         <h5 id="activity_list_header" class="font-weight-normal text-primary">Lista Attività</h5>
@@ -27,23 +32,22 @@
                         <td>{{ activity.activity_typology}}</td>
                         <td width="16.5%">{{ activity.estimation_time}}</td>
                         <td width="12%">
-                            <form action="{% url 'verify_activity' activity.pk %}" method="get" style="float: left"> {% csrf_token %}
+                            <form action="{% url 'verify_activity' activity.pk %}" method="get" style="float: left">
                                 <span title="Verifica Attività">
                                     <button class="btn btn-success btn-circle btn-sm ml-2"><i class="fas fa-check"></i></button>
                                 </span>
                             </form>
-                            <form action="{% url 'verify_activity' activity.pk %}" method="get" style="float: left"> {% csrf_token %}
+                            <form id="assign_button" onclick="setFormAction();" action="{% url 'assign_activity' activity.pk activity.week %}" method="get" style="float: left">
                                 <span title="Assegna Attività">
                                     <button class="btn btn-primary btn-circle btn-sm ml-2"><i class="fas fa-calendar-check"></i></button>
                                 </span>
                             </form>
-                            <form action="{% url 'activity_edit' activity.pk %}" method="get" style="float: left"> {% csrf_token %}
+                            <form action="{% url 'activity_edit' activity.pk %}" method="get" style="float: left">
                                 <span title="Modifica Attività">
                                     <button class="btn btn-info btn-circle btn-sm ml-2"><i class="fas fa-edit"></i></button>
                                 </span>
                             </form>
                             <form action="{% url 'activity_delete' activity.pk %}" method="post" style="float: left">
-                                {% csrf_token %}
                                 <span title="Elimina Attività">
                                     <button class="btn btn-danger btn-circle btn-sm ml-2" onclick="return confirm('Are you sure?');"><i class="fas fa-trash "></i></button>
                                 </span>

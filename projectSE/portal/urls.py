@@ -1,5 +1,5 @@
 from django.urls import path, include
-from . import views, views_admin_users, view_admin_procedures, view_planner_activity
+from . import views, views_admin_users, view_admin_procedures, view_planner_activity, view_planner_assign
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
 
@@ -23,4 +23,6 @@ urlpatterns = [
     path('planner/home/<int:pk>/delete-activity/', login_required(view_planner_activity.PlannerDeleteView.as_view()), name='activity_delete'),
     path('planner/home/<int:pk>/edit-activity/', login_required(view_planner_activity.ActivityEditView.as_view()), name='activity_edit'),
     path('planner/home/<int:pk>/verify-information-activity/', login_required(view_planner_activity.VerifyActivityView.as_view()), name='verify_activity'),
+    path('planner/home/assign-activity?pk<int:pk>&week=<week>', view_planner_assign.AssignView, name='assign_activity'),
+    path('planner/home/assign-activity', view_planner_assign.AssignView, name='assign_activity'),
 ]
