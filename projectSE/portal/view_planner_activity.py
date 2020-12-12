@@ -123,7 +123,7 @@ class OwnerVerifyActivityMixin(object):
     ]
 
     template_name = 'portal/planner/verify_information_activity.html'
-    #success_url = reverse()
+    success_url = reverse_lazy('planner_home')
     
 
 class VerifyActivityView(OwnerVerifyActivityMixin, PlannerCheck, generic.UpdateView):
