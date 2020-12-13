@@ -14,7 +14,7 @@ class Competence(models.Model):
     listProcedure = models.ForeignKey(Procedure, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return(self.competenceName + ' ' + str(self.listProcedure))
+        return(self.competenceName )
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
