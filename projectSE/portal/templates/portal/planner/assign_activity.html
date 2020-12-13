@@ -1,13 +1,16 @@
-{% extends 'base_planner.html' %} {% block content %} {% load mathfilters %}
+{% extends 'base_planner.html' %} {% block content %}
+{% load mathfilters %}
 <script>
-    function percentageFunc() {
-        var str = {
-            {
-                assignment.slot8_9
-            }
-        }
+    function percentageFunc(){
+        var str = "";
+        {% for assignment in list_maintainer %}
+
+        str = str + " " + {{ assignment.slot8_9 }};
+
+        {% endfor %}
         document.getElementById("percentage").innerHTML = "Ciao " + str;
     }
+
 </script>
 <div class="card shadow mb-4">
     <div class="card-header">
@@ -18,32 +21,50 @@
             <div class="col mr-2">
                 <div class="form-group">
                     <div class="text-left">
-                        <b><label class="control-label"> Tipo di Attività  </label></b> {% for activity in list_activity %}
+                        <b><label class="control-label"> Tipo di Attività  </label></b>
+                        {% for activity in list_activity %}
                         <div>{{ activity.activity_type}}</div>
                         <br>
-                        <div style="position: absolute; top: 0%; right: 25%"><b><label class="control-label">Sito</label></b><br> {{ activity.factory_site }}</div>
-                        <div style="position: absolute; top: 0%; right: 13%"><b><label class="control-label">Area</label></b><br> {{ activity.factory_area }}</div>
-                        <div style="position: absolute; top: 0%; left: 14%"><b><label class="control-label">Tipologia Attività</label></b><br> {{ activity.activity_typology }}</div>
-                        <div><b><label class="control-label">Descrizione</label></b><br> {{ activity.activity_description }}</div>
-                        <div style="position: absolute; top: 0%; left: 52%"><b><label class="control-label">Tempo Stimato:&nbsp</label></b> {{ activity.estimation_time }} min.</div>
+                        <div style="position: absolute; top: 0%; right: 25%"><b><label class="control-label">Sito</label></b><br>
+                        {{ activity.factory_site }}</div>
+                        <div style="position: absolute; top: 0%; right: 13%"><b><label class="control-label">Area</label></b><br>
+                        {{ activity.factory_area }}</div>
+                        <div style="position: absolute; top: 0%; left: 14%"><b><label class="control-label">Tipologia Attività</label></b><br>
+                        {{ activity.activity_typology }}</div>
+                        <div><b><label class="control-label">Descrizione</label></b><br>
+                        {{ activity.activity_description }}</div>
+                        <div style="position: absolute; top: 0%; left: 52%"><b><label class="control-label">Tempo Stimato:&nbsp</label></b>
+                        {{ activity.estimation_time }} min.</div>
                         <br>
                         <div style="position: absolute; top: 0%; left: 39%"><b><label class="control-label">Interrompibile:&nbsp</label></b>
-                            <input type="checkbox" {% if activity.interruptible %} checked {% endif %} onclick="return false;" />
-                            <br></div>
+                        <input type="checkbox" {% if activity.interruptible %} checked {% endif %} onclick="return false;" />
+                        <br></div>
                         <b><label class="control-label">Materiali</label></b>
                         <div>
-                            {% if activity.materials %} {{ activity.materials}} {% else %} Non sono richiesti Materiali per lo svolgimento di tale attività. {% endif %}
+                            {% if activity.materials %}
+                                {{ activity.materials}}
+                            {% else %}
+                                Non sono richiesti Materiali per lo svolgimento di tale attività.
+                            {% endif %}
                         </div>
                         <br>
                         <b><label class="control-label">Competenze Richieste</label></b>
                         <div>
-                            {% for x in activity.competences_needed.all %} {{ x }} <br> {% endfor %}
+                            {% for x in activity.competences_needed.all %}
+                            {{ x }}<br>
+                            {% endfor %}
                         </div>
                         <br>
-                        <div style="position: absolute; top: 0%; left: 28%"><b><label class="control-label">Settimana:&nbsp</label></b> {{ activity.week}}</div>
+                        <div style="position: absolute; top: 0%; left: 28%"><b><label class="control-label">Settimana:&nbsp</label></b>
+                        {{ activity.week}}</div>
                         <b><label class="control-label" >Workspace Notes</label></b>
                         <div>
-                            {% if activity.workspace_notes %} {{ activity.workspace_notes}} {% else %} Non ci sono Workspace Notes. {% endif %}
+                            {% if activity.workspace_notes %}
+                                {{ activity.workspace_notes}}
+
+                            {% else %}
+                                Non ci sono Workspace Notes.
+                            {% endif %}
                         </div>
                         <br>
                     </div>
@@ -71,21 +92,36 @@
 
                     <tr>
                         <td>{{ assignment.maintainer }}</td>
-                        <td>{{ assignment.maintainer.competences.all|length }}</td>
+                        <td>
+                            {% for activity in list_activity %}
+                                {% for competence_needed in activity.competences_needed.all %}
+                                    {{ competence_needed }}
+                                    {% for competence in assignment.maintainer.competences.all %}
+
+                                        {% if competence_needed == competence %}
+                                            <i class="fas fa-check" style="float: right">
+                                        {% endif %}
+                                    {% endfor %}
+                                        <br>
+                                {% endfor %}
+                            {% endfor %}
+                        </td>
                         {% if assignment.day == "Lunedì" %}
                         <td>{{ assignment.slot8_9|add:assignment.slot9_10|add:assignment.slot10_11|add:assignment.slot11_12|add:assignment.slot14_15|add:assignment.slot15_16|add:assignment.slot16_17|mul:"100"|div:"420"|sub:"100"|abs|floatformat:"2" }}%</td>
                         {% else %}
                         <td></td>
-                        {% endif %} {% if assignment.day == "Martedì" %}
-                        <td>{{ assignment.slot8_9|add:assignment.slot9_10|add:assignment.slot10_11|add:assignment.slot11_12|add:assignment.slot14_15|add:assignment.slot15_16|add:assignment.slot16_17|mul:"100"|div:"420"|sub:"100"|abs|floatformat:"2" }}%</td>
-                        {% else %}
-                        <td></td>
-                        {% endif %} {% if assignment.day == "Mercoledì" %}
+                        {% endif %}
+                        {% if assignment.day == "Martedì" %}
                         <td>{{ assignment.slot8_9|add:assignment.slot9_10|add:assignment.slot10_11|add:assignment.slot11_12|add:assignment.slot14_15|add:assignment.slot15_16|add:assignment.slot16_17|mul:"100"|div:"420"|sub:"100"|abs|floatformat:"2" }}%</td>
                         {% else %}
                         <td></td>
                         {% endif %}
-                        <td>
+                        {% if assignment.day == "Mercoledì" %}
+                        <td>{{ assignment.slot8_9|add:assignment.slot9_10|add:assignment.slot10_11|add:assignment.slot11_12|add:assignment.slot14_15|add:assignment.slot15_16|add:assignment.slot16_17|mul:"100"|div:"420"|sub:"100"|abs|floatformat:"2" }}%</td>
+                        {% else %}
+                        <td></td>
+                        {% endif %}
+                        <td id="percentage" onclick="percentageFunc()">
 
                         </td>
                     </tr>
