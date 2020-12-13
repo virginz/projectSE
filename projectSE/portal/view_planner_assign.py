@@ -14,3 +14,9 @@ def AssignView(request, pk, week):
     activity = Activity.objects.filter(pk=pk)
     availability = Availability.objects.filter(week=week)
     return render(request, "portal/planner/assign_activity.html", {"list_activity":activity,"list_maintainer":availability})
+
+def ViewAvailabily(request, pkAct, pkAva):
+    availability = Availability.objects.filter(pk=pkAva)
+    activity = Activity.objects.filter(pk=pkAct)
+    return render(request, "portal/planner/view_slot.html", {"list_activity":activity, "availability":availability})
+
