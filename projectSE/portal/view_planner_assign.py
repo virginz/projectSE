@@ -75,7 +75,7 @@ def AssignSlot15_16(request, pkAct, pkAva):
     availability.save()
     activity.save()
     return HttpResponseRedirect(reverse('planner_home'))
-!
+
 def AssignSlot16_17(request, pkAct, pkAva):
     availability = Availability.objects.get(pk=pkAva)
     activity = Activity.objects.get(pk=pkAct)

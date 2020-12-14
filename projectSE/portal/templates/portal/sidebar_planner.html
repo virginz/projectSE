@@ -14,11 +14,22 @@
 
     <!-- Heading -->
 
+
+
     <li class="nav-item">
-        <a class="nav-link collapsed" href="{% url 'planner_home' %}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-tasks"></i>
-            <span>Lista attività</span></a>
+            <span>Lista attività</span>
+        </a>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header"></h6>
+                <a class="collapse-item" href="{% url 'planner_home' %}">Attività da assegnare</a>
+                <a class="collapse-item" href="{% url 'activity_assigned' %}">Attività assegnate</a>
+            </div>
+        </div>
     </li>
+
     <hr class="sidebar-divider">
     <li class="nav-item">
         <a class="nav-link collapsed" href="{% url 'add_activity' %}">
