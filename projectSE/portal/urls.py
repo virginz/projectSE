@@ -27,4 +27,11 @@ urlpatterns = [
     path('planner/home/assign-activity', view_planner_assign.AssignView, name='assign_activity'),
     path('planner/home/slot-activity?pkActivity<int:pkAct>&pkAvailability=<int:pkAva>', view_planner_assign.ViewAvailabily, name='availability_slot'),
     path('planner/home/slot-activity', view_planner_assign.ViewAvailabily, name='availability_slot'),
+    path('planner/home/assign-slot?pkActivity<int:pkAct>&pkAvailability=<int:pkAva>', view_planner_assign.AssignSlot8_9, name='assign_slot8_9'),
+    path('planner/home/assign-slot?pkActivity<int:pkAct>&pkAvailability=<int:pkAva>', view_planner_assign.AssignSlot9_10, name='assign_slot8_9'),
+    path('planner/home/assign-slot?pkActivity<int:pkAct>&pkAvailability=<int:pkAva>', view_planner_assign.AssignSlot10_11, name='assign_slot8_9'),
+    path('planner/home/assign-slot?pkActivity<int:pkAct>&pkAvailability=<int:pkAva>', view_planner_assign.AssignSlot11_12, name='assign_slot8_9'),
+    path('planner/home/assign-slot?pkActivity<int:pkAct>&pkAvailability=<int:pkAva>', view_planner_assign.AssignSlot14_15, name='assign_slot8_9'),
+    path('planner/home/assign-slot?pkActivity<int:pkAct>&pkAvailability=<int:pkAva>', view_planner_assign.AssignSlot15_16, name='assign_slot8_9'),
+    path('planner/home/assign-slot?pkActivity<int:pkAct>&pkAvailability=<int:pkAva>', view_planner_assign.AssignSlot16_17, name='assign_slot8_9'),
 ]

@@ -27,18 +27,48 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for av in availability %}
+                    {% for av in availability %} {% for act in list_activity %}
 
                     <tr>
-                        <td>{{ av.slot8_9}}</td>
-                        <td>{{ av.slot9_10}}</td>
-                        <td>{{ av.slot10_11}}</td>
-                        <td>{{ av.slot11_12}}</td>
-                        <td>{{ av.slot14_15}}</td>
-                        <td>{{ av.slot15_16}}</td>
-                        <td>{{ av.slot16_17}}</td>
-                    </tr>
 
+                        <td>
+
+                            <form action="{% url 'assign_slot8_9' act.pk av.pk%}" method="get" style="float: left">
+                                <button class="btn-sm ml-2">{{av.slot8_9}}</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{% url 'assign_slot9_10' act.pk av.pk%}" method="get" style="float: left">
+                                <button class="btn-sm ml-2">{{av.slot9_10}}</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{% url 'assign_slot10_11' act.pk av.pk%}" method="get" style="float: left">
+                                <button class="btn-sm ml-2">{{av.slot10_11}}</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{% url 'assign_slot11_12' act.pk av.pk%}" method="get" style="float: left">
+                                <button class="btn-sm ml-2">{{av.slot11_12}}</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{% url 'assign_slot14_15' act.pk av.pk%}" method="get" style="float: left">
+                                <button class="btn-sm ml-2">{{av.slot14_15}}</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{% url 'assign_slot15_16' act.pk av.pk%}" method="get" style="float: left">
+                                <button class="btn-sm ml-2">{{av.slot15_16}}</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{% url 'assign_slot16_17' act.pk av.pk%}" method="get" style="float: left">
+                                <button class="btn-sm ml-2">{{av.slot16_17}}</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}{% endfor %}
                 </tbody>
             </table>
 
