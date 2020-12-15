@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
 import csv, io
 from django.urls import reverse_lazy
-from .models import Activity, Availability
+from .models import Activity, Assignment
 
 class PlannerCheck(UserPassesTestMixin):
     def test_func(self):

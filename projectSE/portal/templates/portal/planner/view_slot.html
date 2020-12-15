@@ -1,0 +1,48 @@
+{% extends 'base_planner.html' %} {% block content %}
+<script>
+    function setFormAction() {
+        var action_before = document.
+    }
+</script>
+<div class="card shadow mb-4">
+    <div class="card-header">
+        <h5 id="activity_list_header" class="font-weight-normal text-primary">Disponibilità giornaliera</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <select id="selectWeek" onchange="javascript:location.href = this.value;" class="form-control" id="week" name="week" style="width:13%"><br>
+
+            </select>
+            <br>
+            <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0" style="text-align: center;">
+                <thead>
+                    <th>8-9</th>
+                    <th>9-10</th>
+                    <th>10-11</th>
+                    <th>11-12</th>
+                    <th>14-15</th>
+                    <th>15-16</th>
+                    <th>16-17</th>
+                    <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for av in availability %}
+
+                    <tr>
+                        <td>{{ av.slot8_9}}</td>
+                        <td>{{ av.slot9_10}}</td>
+                        <td>{{ av.slot10_11}}</td>
+                        <td>{{ av.slot11_12}}</td>
+                        <td>{{ av.slot14_15}}</td>
+                        <td>{{ av.slot15_16}}</td>
+                        <td>{{ av.slot16_17}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

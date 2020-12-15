@@ -30,14 +30,17 @@ class Profile(models.Model):
     def __str__(self):
         return (self.user.last_name + ' ' + self.user.first_name)
 
-class Availability(models.Model):
-    slot8_9 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
-    slot9_10 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
-    slot10_11 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
-    slot11_12 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
-    slot14_15 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
-    slot15_16 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
-    slot16_17 = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(0)])
+class Assignment(models.Model):
+    minutes = models.IntegerField(default=0, validators=[MaxValueValidator(60), MinValueValidator(1)])
+    time_slot = models.CharField(max_length=20, blank=True, null=True, choices = [
+        ('8-9', '8-9'),
+        ('9-10', '9-10'),
+        ('10-11', '10-11'),
+        ('11-12', '11-12'),
+        ('14-15', '14-15'),
+        ('15-16', '15-16'),
+        ('16-17', '16-17'),
+    ])
     day = models.CharField(max_length=20, choices = [
         ('Lunedì', 'Lunedì'),
         ('Martedì', 'Martedì'),
@@ -52,7 +55,7 @@ class Availability(models.Model):
 
     def __str__(self):
 
-        return('Disponibilità giorno ' + str(self.day) + ", Settimana " + str(self.week) + ", Maintainer: " + str(self.maintainer))
+        return(str(self.day) + ", Settimana " + str(self.week) + ", Maintainer: " + str(self.maintainer) + ", " + str(self.minutes) + " minuti nello slot " + str(self.time_slot))
 
 
 class Activity(models.Model):
