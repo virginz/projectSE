@@ -5,10 +5,7 @@ from django.contrib.auth.models import User
 class TestModels(TestCase):
 
     def setUp(self):
-        self.competence1 = Competence.objects.create(
-            competenceName = 'competenza',
-            listTask = 'lista delle task'
-        )
+
         self.user = User.objects.create(
             username = 'paoletto',
             password = 'ingegnere',
@@ -24,11 +21,8 @@ class TestModels(TestCase):
             procedureDescription = 'aprire la bottiglia e cambiare olio'
         )
 
-    def test_competence(self):
-        self.assertEquals(str(self.competence1), 'competenza lista delle task')
-
     def test_profile(self):
-        self.assertEquals(str(self.profile), 'Colella Paolo SystemAdministrator')
+        self.assertEquals(str(self.profile), 'Colella Paolo')
 
     def test_procedure(self):
         self.assertEquals(str(self.procedure), 'cambio olio aprire la bottiglia e cambiare olio')

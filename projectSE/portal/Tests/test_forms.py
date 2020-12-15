@@ -14,4 +14,4 @@ class TestForms(SimpleTestCase):
             'username' : 'paolocolella@gmail.com',
             'password': 'ds'
         })
-        self.assertTrue(form.is_valid())
+        self.assertFalse(form.is_valid())
