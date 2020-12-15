@@ -17,9 +17,9 @@
 				{% for activity in list_activity %}
 					{% for competence_needed in activity.competences_needed.all %}
 						competence_needed = competence_needed + "{{ competence_needed }}<i class=\"fas fa-times-circle\" aria-hidden=\"true\" style=\"float: right\"></i><br>";
-						{% for competence in avail.maintainer.competences.all %}
+						{% for competence in maintainer.competences.all %}
 							{% if competence_needed == competence %}
-								competence_needed = competence_needed.substring(0, competence_needed.length-71) + "<i class=\"fas fa-check-circle\" aria-hidden=\"true\" style=\"float: right\"></i>";
+								competence_needed = competence_needed.substring(0, competence_needed.length-71) + "<i class=\"fas fa-check-circle\" aria-hidden=\"true\" style=\"float: right\"></i><br>";
 							{% endif %}
 						{% endfor %}
 					{% endfor %}
@@ -43,6 +43,8 @@
 			{% endfor %}
             t_body = t_body + maintainer + "<td style=\"text-align: left\">" + competence_needed + availability_per_day + "</tr>";
             availability_per_day = "";
+            flag = 0;
+            competence_needed = "";
         {% endfor %}
         document.getElementById("tbody").innerHTML = t_body;
         document.getElementById("backButton").style.display = "none";
