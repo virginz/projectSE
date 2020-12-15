@@ -25,7 +25,7 @@ def ViewAvailabily(request, pkAct, pkAva):
 def AssignSlot8_9(request, pkAct, pkAva):
     availability = Availability.objects.get(pk=pkAva)
     activity = Activity.objects.get(pk=pkAct)
-    availability.slot8_9 = availability.slot8_9 - activity.estimation_time
+    availability.slot8_9 = availability.slot8_9 + activity.estimation_time
     activity.assigned_to = True
     availability.save()
     activity.save()
@@ -34,7 +34,7 @@ def AssignSlot8_9(request, pkAct, pkAva):
 def AssignSlot9_10(request, pkAct, pkAva):
     availability = Availability.objects.get(pk=pkAva)
     activity = Activity.objects.get(pk=pkAct)
-    availability.slot9_10 = availability.slot9_10 - activity.estimation_time
+    availability.slot9_10 = availability.slot9_10 + activity.estimation_time
     activity.assigned_to = True
     availability.save()
     activity.save()
@@ -43,7 +43,7 @@ def AssignSlot9_10(request, pkAct, pkAva):
 def AssignSlot10_11(request, pkAct, pkAva):
     availability = Availability.objects.get(pk=pkAva)
     activity = Activity.objects.get(pk=pkAct)
-    availability.slot10_11 = availability.slot10_11 - activity.estimation_time
+    availability.slot10_11 = availability.slot10_11 + activity.estimation_time
     activity.assigned_to = True
     availability.save()
     activity.save()
@@ -52,7 +52,7 @@ def AssignSlot10_11(request, pkAct, pkAva):
 def AssignSlot11_12(request, pkAct, pkAva):
     availability = Availability.objects.get(pk=pkAva)
     activity = Activity.objects.get(pk=pkAct)
-    availability.slot11_12 = availability.slot11_12 - activity.estimation_time
+    availability.slot11_12 = availability.slot11_12 + activity.estimation_time
     activity.assigned_to = True
     availability.save()
     activity.save()
@@ -61,7 +61,7 @@ def AssignSlot11_12(request, pkAct, pkAva):
 def AssignSlot14_15(request, pkAct, pkAva):
     availability = Availability.objects.get(pk=pkAva)
     activity = Activity.objects.get(pk=pkAct)
-    availability.slot14_15 = availability.slot14_15 - activity.estimation_time
+    availability.slot14_15 = availability.slot14_15 + activity.estimation_time
     activity.assigned_to = True
     availability.save()
     activity.save()
@@ -70,7 +70,7 @@ def AssignSlot14_15(request, pkAct, pkAva):
 def AssignSlot15_16(request, pkAct, pkAva):
     availability = Availability.objects.get(pk=pkAva)
     activity = Activity.objects.get(pk=pkAct)
-    availability.slot15_16 = availability.slot15_16 - activity.estimation_time
+    availability.slot15_16 = availability.slot15_16 + activity.estimation_time
     activity.assigned_to = True
     availability.save()
     activity.save()
@@ -79,7 +79,7 @@ def AssignSlot15_16(request, pkAct, pkAva):
 def AssignSlot16_17(request, pkAct, pkAva):
     availability = Availability.objects.get(pk=pkAva)
     activity = Activity.objects.get(pk=pkAct)
-    availability.slot16_17 = availability.slot16_17 - activity.estimation_time
+    availability.slot16_17 = availability.slot16_17 + activity.estimation_time
     activity.assigned_to = True
     availability.save()
     activity.save()
