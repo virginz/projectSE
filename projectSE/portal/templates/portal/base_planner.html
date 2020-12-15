@@ -24,25 +24,25 @@
 
 </head>
 <script>
-function iterWeek() {
-    var x = 0;
-    var str = "";
-    for (x = 1; x < 53; x++){
-        str = str + "<option value=\"?week=" + x + "\">Week " + x + "</option>";
+    function iterWeek() {
+        var str = "";
+        for (var x = 1; x < 53; x++) {
+            str = str + "<option value=\"?week=" + x + "\">Week " + x + "</option>";
+        }
+        document.getElementById("selectWeek").innerHTML = "<option selected disabled>Seleziona Settimana</option> <option value=\"?week=all\">Mostra Tutte</option>" + str;
     }
-    document.getElementById("selectWeek").innerHTML = "<option selected disabled>Seleziona Settimana</option> <option value=\"?week=all\">Mostra Tutte</option>" + str;
-}
 
-function showSelectedWeek(){
-    const urlParams = new URLSearchParams(window.location.search);
-    const week = urlParams.get('week');
-    if (week) {
-        if (week != "all") {
-            document.getElementById("activity_list_header").innerHTML = "Lista Attività - Week " + week;
+    function showSelectedWeek() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const week = urlParams.get('week');
+        if (week) {
+            if (week != "all") {
+                document.getElementById("activity_list_header").innerHTML = "Lista Attività - Week " + week;
+            }
         }
     }
-}
 </script>
+
 <body id="page-top" onload="iterWeek(); showSelectedWeek();">
 
     <!-- Page Wrapper -->
