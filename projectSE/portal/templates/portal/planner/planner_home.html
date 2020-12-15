@@ -1,6 +1,6 @@
 {% extends 'base_planner.html' %} {% block content %}
 <script>
-    function setFormAction(){
+    function setFormAction() {
         var action_before = document.
     }
 </script>
@@ -32,6 +32,7 @@
                         <td>{{ activity.activity_typology}}</td>
                         <td width="16.5%">{{ activity.estimation_time}}</td>
                         <td width="16.5%">
+                            {% if activity.assigned_to == False %}
                             <form action="{% url 'verify_activity' activity.pk %}" method="get" style="float: left">
                                 <span title="Verifica Attività">
                                     <button class="btn btn-success btn-circle btn-sm ml-2"><i class="fas fa-check"></i></button>
@@ -52,7 +53,7 @@
                                     <button class="btn btn-danger btn-circle btn-sm ml-2" onclick="return confirm('Are you sure?');"><i class="fas fa-trash "></i></button>
                                 </span>
                             </form>
-                        </td>
+                            {% endif %}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

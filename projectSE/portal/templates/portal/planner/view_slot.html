@@ -10,9 +10,7 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <select id="selectWeek" onchange="javascript:location.href = this.value;" class="form-control" id="week" name="week" style="width:13%"><br>
 
-            </select>
             <br>
             <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0" style="text-align: center;">
                 <thead>
@@ -23,22 +21,60 @@
                     <th>14-15</th>
                     <th>15-16</th>
                     <th>16-17</th>
-                    <th></th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    {% for av in availability %}
+                    {% for av in availability %} {% for act in list_activity %}
 
                     <tr>
-                        <td>{{ av.slot8_9}}</td>
-                        <td>{{ av.slot9_10}}</td>
-                        <td>{{ av.slot10_11}}</td>
-                        <td>{{ av.slot11_12}}</td>
-                        <td>{{ av.slot14_15}}</td>
-                        <td>{{ av.slot15_16}}</td>
-                        <td>{{ av.slot16_17}}</td>
-                    </tr>
 
+                        <td>
+                            {% if act.estimation_time > av.slot8_9 %}
+                            <form action="{% url 'assign_slot8_9' act.pk av.pk%}" method="get" style="float: left">
+                                <button class="btn-sm ml-2">{{av.slot8_9}}</button>
+                            </form>
+                            {% else %}Non è possibile assegnarlo in questo slot {% endif %}
+                        </td>
+                        <td>
+                            {% if act.estimation_time > av.slot9_10 %}
+                            <form action="{% url 'assign_slot9_10' act.pk av.pk%}" method="get" style="float: left">
+                                <button class="btn-sm ml-2">{{av.slot9_10}}</button>
+                            </form>
+                            {% else %}Non è possibile assegnarlo in questo slot {% endif %}
+                        </td>
+                        <td>
+                            {% if act.estimation_time > av.slot10_11 %}
+                            <form action="{% url 'assign_slot10_11' act.pk av.pk%}" method="get" style="float: left">
+                                <button class="btn-sm ml-2">{{av.slot10_11}}</button>
+                            </form>{% else %}Non è possibile assegnarlo in questo slot {% endif %}
+                        </td>
+                        <td>
+                            {% if act.estimation_time > av.slot11_12%}
+                            <form action="{% url 'assign_slot11_12' act.pk av.pk%}" method="get" style="float: left">
+                                <button class="btn-sm ml-2">{{av.slot11_12}}</button>
+                            </form>{% else %}Non è possibile assegnarlo in questo slot {% endif %}
+                        </td>
+                        <td>
+                            {% if act.estimation_time > av.slot14_15%}
+                            <form action="{% url 'assign_slot14_15' act.pk av.pk%}" method="get" style="float: left">
+                                <button class="btn-sm ml-2">{{av.slot14_15}}</button>
+                            </form>{% else %}Non è possibile assegnarlo in questo slot {% endif %}
+                        </td>
+                        <td>
+                            {% if act.estimation_time > av.slot15_16 %}
+                            <form action="{% url 'assign_slot15_16' act.pk av.pk%}" method="get" style="float: left">
+                                <button class="btn-sm ml-2">{{av.slot15_16}}</button>
+                            </form>{% else %}Non è possibile assegnarlo in questo slot {% endif %}
+                        </td>
+                        <td>
+                            {% if act.estimation_time > av.slot16_17 %}
+                            <form action="{% url 'assign_slot16_17' act.pk av.pk%}" method="get" style="float: left">
+                                <button class="btn-sm ml-2">{{av.slot16_17}}</button>
+                            </form>{% else %}Non è possibile assegnarlo in questo slot {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}{% endfor %}
                 </tbody>
             </table>
 

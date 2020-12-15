@@ -1,5 +1,4 @@
-{% extends 'base_planner.html' %} {% block content %}
-{% load mathfilters %}
+{% extends 'base_planner.html' %} {% block content %} {% load mathfilters %}
 <script>
     function createTable(){
         var t_body = "";
@@ -48,9 +47,8 @@
         document.getElementById("selectButton").style.display = "none";
         document.getElementById("tableAssign").style.display = "block";
     }
-
 </script>
-<div class="card shadow mb-4" onload="createTable();">
+<div class="card shadow mb-4">
     <div class="card-header">
         <h5 class="font-weight-normal text-primary">Assegna Attività</h5>
     </div>
