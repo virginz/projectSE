@@ -12,6 +12,5 @@ class addSingleUserForm(forms.Form):
  last_name = forms.CharField()
  usertype = forms.CharField()
 
-class selectWeek(forms.Form):
- week = forms.IntegerField()
+
 

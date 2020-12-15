@@ -26,3 +26,5 @@ class TestModels(TestCase):
 
     def test_procedure(self):
         self.assertEquals(str(self.procedure), 'cambio olio aprire la bottiglia e cambiare olio')
+
+
