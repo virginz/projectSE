@@ -33,7 +33,7 @@
                     if (maintainer == "<td>{{assignment.maintainer}}</td>") {
                         assign_day = "{{assignment.day}}";
                         if (i == 0 && assign_day == "Lunedì" || i == 1 && assign_day == "Martedì" || i == 2 && assign_day == "Mercoledì" || i == 3 && assign_day == "Giovedì" || i == 4 && assign_day == "Venerdì" || i == 5 && assign_day == "Sabato" || i == 6 && assign_day == "Domenica")
-                            min_disp = min_disp - {{assignment.minutes}};
+                            min_disp = min_disp - 60 + {{assignment.minutes}};
                         else
                             min_disp = 420;
                     }
