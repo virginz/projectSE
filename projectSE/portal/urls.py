@@ -25,7 +25,7 @@ urlpatterns = [
     path('planner/home/<int:pk>/verify-information-activity/', login_required(view_planner_activity.VerifyActivityView.as_view()), name='verify_activity'),
     path('planner/home/assign-activity?pk<int:pk>&week=<week>', view_planner_assign.AssignView, name='assign_activity'),
     path('planner/home/assign-activity', view_planner_assign.AssignView, name='assign_activity'),
-    path('planner/home/slot-activity?pkActivity<int:pkAct>&pkAvailability=<int:pkAva>', view_planner_assign.ViewAvailabily, name='availability_slot'),
+    path('planner/home/slot-activity?pkActivity=<int:pkAct>&pkMaintainer=<int:pkMain>&day=<int:day>', view_planner_assign.ViewAvailabily, name='availability_slot'),
     path('planner/home/slot-activity', view_planner_assign.ViewAvailabily, name='availability_slot'),
     path('planner/home/actitivy-assigned', view_planner_activity.ActivityAssigned.as_view(), name='activity_assigned'),
     path('planner/home/slot-activity?pkActivity<int:pkAct>&pkAvailability=<int:pkAva>', view_planner_assign.ViewAvailabily, name='availability_slot'),
