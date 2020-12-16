@@ -15,7 +15,7 @@
                     <th>Area ⇵</th>
                     <th>Tipologia ⇵</th>
                     <th>Tempo di Intervento Stimato ⇵</th>
-                    {% if activity.assigned_to == False %}<th></th>{% endif %}
+                    <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,7 +26,6 @@
                         <td width="30%">{{ activity.factory_site}} - {{ activity.factory_area}}</td>
                         <td>{{ activity.activity_typology}}</td>
                         <td width="16.5%">{{ activity.estimation_time}}</td>
-                        {% if activity.assigned_to == False %}
                         <td width="16.5%">
 
                             <form action="{% url 'verify_activity' activity.pk %}" method="get" style="float: left">
@@ -51,7 +50,7 @@
                             </form>
 
                     </tr>
-                    {% endif %}</td>
+                    </td>
                     {% endfor %}
                 </tbody>
             </table>
