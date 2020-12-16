@@ -1,10 +1,4 @@
 {% extends "base_planner.html" %} {% block content %}
-<style>
-    textarea {
-        resize: none;
-    }
-</style>
-
 <div class="card border-left-primary" >
     <div class="card-header">
         <h3>
@@ -38,7 +32,11 @@
                             <div>{{ view_information.materials}}</div>
                             <br>
                             <b><label class="control-label">Competenze Richieste</label></b>
-                            <div>{{ view_information.competences_needed}}</div>
+                            <div>
+                                {% for x in view_information.competences_needed.all %}
+                                    {{ x }}<br>
+                                {% endfor %}
+                            </div>
                             <br>
                             <div style="position: absolute; top: 0%; left: 28%"><b><label class="control-label">Settimana:&nbsp</label></b>
                             {{ view_information.week}}</div>

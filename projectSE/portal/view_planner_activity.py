@@ -58,6 +58,7 @@ class OwnerActivityMixin(OwnerMixin):
         'materials',
         'week',
         'workspace_notes',
+        'competences_needed'
     ]
 
     success_url = reverse_lazy('planner_home')
@@ -79,6 +80,7 @@ class ActivityCreateView(OwnerActivityEditMixin, PlannerCheck, generic.CreateVie
         'materials',
         'week',
         'workspace_notes',
+        'competences_needed'
     ]
 
 class PlannerDeleteView(PlannerCheck, generic.DeleteView):
@@ -100,6 +102,7 @@ class ActivityEditView(OwnerActivityEditMixin, PlannerCheck, generic.UpdateView)
         'materials',
         'week',
         'workspace_notes',
+        'competences_needed'
     ]
 
 class OwnerVerifyActivityMixin(object):
@@ -139,4 +142,3 @@ class ActivityAssigned(PlannerCheck, generic.ListView):
     def get_queryset(self):
         return super().get_queryset().order_by('pk').filter(assigned_to=True)
         
-            

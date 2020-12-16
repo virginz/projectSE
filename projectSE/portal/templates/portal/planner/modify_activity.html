@@ -12,40 +12,38 @@
                 <div class="form-group">
                     <form method="post">
                         <div class="text-left">
-                            <label class="control-label"> Tipo di Attività  </label>
+                            <b><label class="control-label"> Tipo di Attività  </label></b>
                             <div>{{ form.activity_type}}</div>
                             <br>
-                            <label class="control-label">Sito</label>
-                            <div>{{ form.factory_site }}</div>
+                            <div style="position: absolute; top: 0%; right: 23%"><b><label class="control-label">Sito</label></b><br>
+                            {{ form.factory_site }}</div>
+                            <div style="position: absolute; top: 0%; right: 8%"><b><label class="control-label">Area</label></b><br>
+                            {{ form.factory_area }}</div>
+                            <div style="position: absolute; top: 0%; left: 14%"><b><label class="control-label">Tipologia Attività</label></b><br>
+                            {{ form.activity_typology }}</div>
+                            <div><b><label class="control-label">Descrizione</label></b><br>
+                            {{ form.activity_description }}</div>
+                            <div style="position: absolute; top: 0%; left: 45%"><b><label class="control-label">Tempo D'intervento Stimato (min):&nbsp</label></b><br>
+                            {{ form.estimation_time }}</div>
                             <br>
-                            <label class="control-label">Area</label>
-                            <div>{{ form.factory_area }}</div>
+                            <div style="position: absolute; top: 23%; right: 9.8%"><b><label class="control-label">Interrompibile:</label></b>&nbsp;
+                            {{ form.interruptible}}</div>
+                            <div style="position: absolute; top:16%; left: 28%"><b><label class="control-label">Materiali</label></b><br>
+                            {{ form.materials}}</div>
                             <br>
-                            <label class="control-label">Tipologia Attività</label>
-                            <div>{{ form.activity_typology }}</div>
+                            <div style="position: absolute; top:35%; right: 2.8%"><b><label class="control-label">Competenze Richieste</label></b><br>
+                            {{ form.competences_needed}}<br>(ctrl + click per selezione multipla)</div>
                             <br>
-                            <label class="control-label">Descrizione</label>
-                            <div>{{ form.activity_description }}</div>
-                            <br>
-                            <label class="control-label">Tempo Stimato</label>
-                            <div>{{ form.estimation_time }}</div>
-                            <br>
-                            <label class="control-label">Interrompibile</label>
-                            <div>{{ form.interruptible}}</div>
-                            <br>
-                            <label class="control-label">Materiali</label>
-                            <div>{{ form.materials}}</div>
-                            <br>
-                            <label class="control-label">Settimana</label>
-                            <div>{{ form.week}}</div>
-                            <br>
-                            <label class="control-label">Workspace Notes</label>
-                            <div>{{ form.workspace_notes}}</div>
+                            <div style="position: absolute; top: 0%; left: 28%"><b><label class="control-label">Settimana:</label></b><br>
+                            {{ form.week}}</div>
+                            <div style="position: absolute; top:16%; right: 22%"><b><label class="control-label" >Workspace Notes</label></b><br>
+                            {{ form.workspace_notes}}</div>
                             <br>
                         </div>
                         {% csrf_token %}
-                        <button class='btn btn-primary' type="submit" style="float:right;">Salva</button>
+                        <button class='btn btn-primary' type="submit" style="float:right;" >Conferma Modifica</button>
                     </form>
+                    <button class='btn btn-primary' type="submit" style="float:left;" onclick="window.location='../../'">Torna alla home</button>
                 </div>
             </div>
         </div>
