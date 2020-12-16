@@ -28,13 +28,12 @@ urlpatterns = [
     path('planner/home/slot-activity?pkActivity=<int:pkAct>&pkMaintainer=<int:pkMain>&day=<int:day>', view_planner_assign.ViewAvailabily, name='availability_slot'),
     path('planner/home/slot-activity', view_planner_assign.ViewAvailabily, name='availability_slot'),
     path('planner/home/actitivy-assigned', view_planner_activity.ActivityAssigned.as_view(), name='activity_assigned'),
-    path('planner/home/slot-assigned/<int:pkAss>/<int:pkAct>/<int:day>/<int:maintainer>/', view_planner_assign.AssignSlot8_9, name='slot8_9'),
-    path('planner/home/slot-assigned/<int:pkAss>/<int:pkAct>/<int:day>/<int:maintainer>/', view_planner_assign.AssignSlot9_10, name='slot9_10'),
-    path('planner/home/slot-assigned/<int:pkAss>/<int:pkAct>/<int:day>/<int:maintainer>/', view_planner_assign.AssignSlot10_11, name='slot10_11'),
-    path('planner/home/slot-assigned/<int:pkAss>/<int:pkAct>/<int:day>/<int:maintainer>/', view_planner_assign.AssignSlot11_12, name='slot11_12'),
-    path('planner/home/slot-assigned/<int:pkAss>/<int:pkAct>/<int:day>/<int:maintainer>/', view_planner_assign.AssignSlot14_15, name='slot14_15'),
-    path('planner/home/slot-assigned/<int:pkAss>/<int:pkAct>/<int:day>/<int:maintainer>/', view_planner_assign.AssignSlot15_16, name='slot15_16'),
-    path('planner/home/slot-assigned/<int:pkAss>/<int:pkAct>/<int:day>/<int:maintainer>/', view_planner_assign.AssignSlot16_17, name='slot16_17'),
-
+    path('planner/home/slot-assigned-8-9/<int:pkAss>/<int:pkAct>/<int:day>/<int:maintainer>/', view_planner_assign.AssignSlot8_9, name='slot8_9'),
+    path('planner/home/slot-assigned-9-10/<int:pkAss>/<int:pkAct>/<int:day>/<int:maintainer>/', view_planner_assign.AssignSlot9_10, name='slot9_10'),
+    path('planner/home/slot-assigned-10-11/<int:pkAss>/<int:pkAct>/<int:day>/<int:maintainer>/', view_planner_assign.AssignSlot10_11, name='slot10_11'),
+    path('planner/home/slot-assigned11-12/<int:pkAss>/<int:pkAct>/<int:day>/<int:maintainer>/', view_planner_assign.AssignSlot11_12, name='slot11_12'),
+    path('planner/home/slot-assigned14-15/<int:pkAss>/<int:pkAct>/<int:day>/<int:maintainer>/', view_planner_assign.AssignSlot14_15, name='slot14_15'),
+    path('planner/home/slot-assigned15-16/<int:pkAss>/<int:pkAct>/<int:day>/<int:maintainer>/', view_planner_assign.AssignSlot15_16, name='slot15_16'),
+    path('planner/home/slot-assigned16-17/<int:pkAss>/<int:pkAct>/<int:day>/<int:maintainer>/', view_planner_assign.AssignSlot16_17, name='slot16_17'),
     
 ]

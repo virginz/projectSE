@@ -44,28 +44,28 @@ def ViewAvailabily(request, pkAct, pkMain, day):
     return render(request, "portal/planner/view_slot.html", {"list_activity":activity, "availability":availability, "day":day, "maintainer":maintainer})
 
 def AssignSlot8_9(request, pkAss, pkAct, day, maintainer):
-    
+    if day==0:
+        dayUrl = 'Lunedì'
+    elif day==1:
+        dayUrl = 'Martedì'
+    elif day==2:
+        dayUrl = 'Mercoledì'
+    elif day==3:
+        dayUrl = 'Giovedì'
+    elif day==4:
+        dayUrl = 'Venerdì'
+    elif day==5:
+        dayUrl='Sabato'
+    else:
+        dayUrl='Domenica'
     activity = Activity.objects.get(pk=pkAct)
     main = Profile.objects.get(pk=maintainer)
     if pkAss == 0:
-        if day==0:
-            day = 'Lunedì'
-        elif day==1:
-            day = 'Martedì'
-        elif day==2:
-            day = 'Mercoledì'
-        elif day==3:
-            day = 'Giovedì'
-        elif day==4:
-            day = 'Venerdì'
-        elif day==5:
-            day='Sabato'
-        else:
-            day='Domenica'
+
         assign = Assignment.objects.update_or_create(
             minutes = 60 - activity.estimation_time,
             time_slot = "8-9",
-            day = day,
+            day = dayUrl,
             week = activity.week,
             maintainer = main
         )
@@ -73,67 +73,87 @@ def AssignSlot8_9(request, pkAss, pkAct, day, maintainer):
         activity.save()
     else:
         assign = Assignment.objects.get(pk=pkAss)
-        assign.minutes = assign.minutes - activity.estimation_time
+        if assign.time_slot == "8-9":
+            assign.minutes = assign.minutes - activity.estimation_time
+            assign.save()
+        else:
+            assign = Assignment.objects.update_or_create(
+                minutes = 60 - activity.estimation_time,
+                time_slot = "8-9",
+                day = dayUrl,
+                week = activity.week,
+                maintainer = main
+            )
         activity.assigned_to = True
-        assign.save()
         activity.save()
     return HttpResponseRedirect(reverse('planner_home'))
 
 def AssignSlot9_10(request, pkAss, pkAct, day, maintainer):
-    
+    print("Prima di if day")
+    if day==0:
+        dayUrl = 'Lunedì'
+    elif day==1:
+        dayUrl = 'Martedì'
+    elif day==2:
+        dayUrl = 'Mercoledì'
+    elif day==3:
+        dayUrl = 'Giovedì'
+    elif day==4:
+        dayUrl = 'Venerdì'
+    elif day==5:
+        dayUrl='Sabato'
+    else:
+        dayUrl='Domenica'
     activity = Activity.objects.get(pk=pkAct)
     main = Profile.objects.get(pk=maintainer)
     if pkAss == 0:
-        if day==0:
-            day = 'Lunedì'
-        elif day==1:
-            day = 'Martedì'
-        elif day==2:
-            day = 'Mercoledì'
-        elif day==3:
-            day = 'Giovedì'
-        elif day==4:
-            day = 'Venerdì'
-        elif day==5:
-            day='Sabato'
-        else:
-            day='Domenica'
+        print("dentro pkAss=0")
         assign = Assignment.objects.update_or_create(
             minutes = 60 - activity.estimation_time,
             time_slot = "9-10",
-            day = day,
+            day = dayUrl,
             week = activity.week,
             maintainer = main
         )
         activity.assigned_to = True
         activity.save()
     else:
+        print("dentro else pkAss")
         assign = Assignment.objects.get(pk=pkAss)
-        assign.minutes = assign.minutes - activity.estimation_time
+        if assign.time_slot == "9-10":
+            assign.minutes = assign.minutes - activity.estimation_time
+            assign.save()
+        else:
+            assign = Assignment.objects.update_or_create(
+                minutes = 60 - activity.estimation_time,
+                time_slot = "9-10",
+                day = dayUrl,
+                week = activity.week,
+                maintainer = main
+            )
         activity.assigned_to = True
-        assign.save()
         activity.save()
+
     return HttpResponseRedirect(reverse('planner_home'))
 
 def AssignSlot10_11(request, pkAss, pkAct, day, maintainer):
-    
+    if day==0:
+        day = 'Lunedì'
+    elif day==1:
+        day = 'Martedì'
+    elif day==2:
+        day = 'Mercoledì'
+    elif day==3:
+        day = 'Giovedì'
+    elif day==4:
+        day = 'Venerdì'
+    elif day==5:
+        day='Sabato'
+    else:
+        day='Domenica'
     activity = Activity.objects.get(pk=pkAct)
     main = Profile.objects.get(pk=maintainer)
     if pkAss == 0:
-        if day==0:
-            day = 'Lunedì'
-        elif day==1:
-            day = 'Martedì'
-        elif day==2:
-            day = 'Mercoledì'
-        elif day==3:
-            day = 'Giovedì'
-        elif day==4:
-            day = 'Venerdì'
-        elif day==5:
-            day='Sabato'
-        else:
-            day='Domenica'
         assign = Assignment.objects.update_or_create(
             minutes = 60 - activity.estimation_time,
             time_slot = "10-11",
@@ -145,31 +165,39 @@ def AssignSlot10_11(request, pkAss, pkAct, day, maintainer):
         activity.save()
     else:
         assign = Assignment.objects.get(pk=pkAss)
-        assign.minutes = assign.minutes - activity.estimation_time
+        if assign.time_slot == "10-11":
+            assign.minutes = assign.minutes - activity.estimation_time
+            assign.save()
+        else:
+            assign = Assignment.objects.update_or_create(
+                minutes = 60 - activity.estimation_time,
+                time_slot = "10-11",
+                day = day,
+                week = activity.week,
+                maintainer = main
+            )
         activity.assigned_to = True
-        assign.save()
         activity.save()
     return HttpResponseRedirect(reverse('planner_home'))
 
 def AssignSlot11_12(request, pkAss, pkAct, day, maintainer):
-    
+    if day==0:
+        day = 'Lunedì'
+    elif day==1:
+        day = 'Martedì'
+    elif day==2:
+        day = 'Mercoledì'
+    elif day==3:
+        day = 'Giovedì'
+    elif day==4:
+        day = 'Venerdì'
+    elif day==5:
+        day='Sabato'
+    else:
+        day='Domenica'
     activity = Activity.objects.get(pk=pkAct)
     main = Profile.objects.get(pk=maintainer)
     if pkAss == 0:
-        if day==0:
-            day = 'Lunedì'
-        elif day==1:
-            day = 'Martedì'
-        elif day==2:
-            day = 'Mercoledì'
-        elif day==3:
-            day = 'Giovedì'
-        elif day==4:
-            day = 'Venerdì'
-        elif day==5:
-            day='Sabato'
-        else:
-            day='Domenica'
         assign = Assignment.objects.update_or_create(
             minutes = 60 - activity.estimation_time,
             time_slot = "11-12",
@@ -181,31 +209,39 @@ def AssignSlot11_12(request, pkAss, pkAct, day, maintainer):
         activity.save()
     else:
         assign = Assignment.objects.get(pk=pkAss)
-        assign.minutes = assign.minutes - activity.estimation_time
+        if assign.time_slot == "11-12":
+            assign.minutes = assign.minutes - activity.estimation_time
+            assign.save()
+        else:
+            assign = Assignment.objects.update_or_create(
+                minutes = 60 - activity.estimation_time,
+                time_slot = "11-12",
+                day = day,
+                week = activity.week,
+                maintainer = main
+            )
         activity.assigned_to = True
-        assign.save()
         activity.save()
     return HttpResponseRedirect(reverse('planner_home'))
 
 def AssignSlot14_15(request, pkAss, pkAct, day, maintainer):
-    
+    if day==0:
+        day = 'Lunedì'
+    elif day==1:
+        day = 'Martedì'
+    elif day==2:
+        day = 'Mercoledì'
+    elif day==3:
+        day = 'Giovedì'
+    elif day==4:
+        day = 'Venerdì'
+    elif day==5:
+        day='Sabato'
+    else:
+        day='Domenica'
     activity = Activity.objects.get(pk=pkAct)
     main = Profile.objects.get(pk=maintainer)
     if pkAss == 0:
-        if day==0:
-            day = 'Lunedì'
-        elif day==1:
-            day = 'Martedì'
-        elif day==2:
-            day = 'Mercoledì'
-        elif day==3:
-            day = 'Giovedì'
-        elif day==4:
-            day = 'Venerdì'
-        elif day==5:
-            day='Sabato'
-        else:
-            day='Domenica'
         assign = Assignment.objects.update_or_create(
             minutes = 60 - activity.estimation_time,
             time_slot = "14-15",
@@ -217,34 +253,42 @@ def AssignSlot14_15(request, pkAss, pkAct, day, maintainer):
         activity.save()
     else:
         assign = Assignment.objects.get(pk=pkAss)
-        assign.minutes = assign.minutes - activity.estimation_time
+        if assign.time_slot == "14-15":
+            assign.minutes = assign.minutes - activity.estimation_time
+            assign.save()
+        else:
+            assign = Assignment.objects.update_or_create(
+                minutes = 60 - activity.estimation_time,
+                time_slot = "14-15",
+                day = day,
+                week = activity.week,
+                maintainer = main
+            )
         activity.assigned_to = True
-        assign.save()
         activity.save()
     return HttpResponseRedirect(reverse('planner_home'))
 
 def AssignSlot15_16(request, pkAss, pkAct, day, maintainer):
-    
+    if day==0:
+        day = 'Lunedì'
+    elif day==1:
+        day = 'Martedì'
+    elif day==2:
+        day = 'Mercoledì'
+    elif day==3:
+        day = 'Giovedì'
+    elif day==4:
+        day = 'Venerdì'
+    elif day==5:
+        day='Sabato'
+    else:
+        day='Domenica'
     activity = Activity.objects.get(pk=pkAct)
     main = Profile.objects.get(pk=maintainer)
     if pkAss == 0:
-        if day==0:
-            day = 'Lunedì'
-        elif day==1:
-            day = 'Martedì'
-        elif day==2:
-            day = 'Mercoledì'
-        elif day==3:
-            day = 'Giovedì'
-        elif day==4:
-            day = 'Venerdì'
-        elif day==5:
-            day='Sabato'
-        else:
-            day='Domenica'
         assign = Assignment.objects.update_or_create(
             minutes = 60 - activity.estimation_time,
-            time_slot = "15_16",
+            time_slot = "15-16",
             day = day,
             week = activity.week,
             maintainer = main
@@ -253,31 +297,39 @@ def AssignSlot15_16(request, pkAss, pkAct, day, maintainer):
         activity.save()
     else:
         assign = Assignment.objects.get(pk=pkAss)
-        assign.minutes = assign.minutes - activity.estimation_time
+        if assign.time_slot == "15-16":
+            assign.minutes = assign.minutes - activity.estimation_time
+            assign.save()
+        else:
+            assign = Assignment.objects.update_or_create(
+                minutes = 60 - activity.estimation_time,
+                time_slot = "15-16",
+                day = day,
+                week = activity.week,
+                maintainer = main
+            )
         activity.assigned_to = True
-        assign.save()
         activity.save()
     return HttpResponseRedirect(reverse('planner_home'))
 
 def AssignSlot16_17(request, pkAss, pkAct, day, maintainer):
-    
+    if day==0:
+        day = 'Lunedì'
+    elif day==1:
+        day = 'Martedì'
+    elif day==2:
+        day = 'Mercoledì'
+    elif day==3:
+        day = 'Giovedì'
+    elif day==4:
+        day = 'Venerdì'
+    elif day==5:
+        day='Sabato'
+    else:
+        day='Domenica'
     activity = Activity.objects.get(pk=pkAct)
     main = Profile.objects.get(pk=maintainer)
     if pkAss == 0:
-        if day==0:
-            day = 'Lunedì'
-        elif day==1:
-            day = 'Martedì'
-        elif day==2:
-            day = 'Mercoledì'
-        elif day==3:
-            day = 'Giovedì'
-        elif day==4:
-            day = 'Venerdì'
-        elif day==5:
-            day='Sabato'
-        else:
-            day='Domenica'
         assign = Assignment.objects.update_or_create(
             minutes = 60 - activity.estimation_time,
             time_slot = "16-17",
@@ -289,8 +341,17 @@ def AssignSlot16_17(request, pkAss, pkAct, day, maintainer):
         activity.save()
     else:
         assign = Assignment.objects.get(pk=pkAss)
-        assign.minutes = assign.minutes - activity.estimation_time
+        if assign.time_slot == "16-17":
+            assign.minutes = assign.minutes - activity.estimation_time
+            assign.save()
+        else:
+            assign = Assignment.objects.update_or_create(
+                minutes = 60 - activity.estimation_time,
+                time_slot = "16-17",
+                day = day,
+                week = activity.week,
+                maintainer = main
+            )
         activity.assigned_to = True
-        assign.save()
         activity.save()
     return HttpResponseRedirect(reverse('planner_home'))

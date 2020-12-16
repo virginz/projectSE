@@ -1,14 +1,179 @@
+
 {% extends 'base_planner.html' %} {% block content %}
 <script>
-    function setFormAction() {
-        var action_before = document.
+    function createSlotTable(){
+        {% for m in maintainer %}{% for d in day|make_list %}{% for act in list_activity %}
+        var t_body = "";
+        var time_slot = "";
+        var td = "";
+        var check = "";
+        var num_check = new Array();
+        {% for av in availability %}
+            for (var i = 0; i < 7; i++){
+                time_slot = "{{ av.time_slot }}";
+                if (i == 0 && time_slot == "8-9") {
+                    check = check + time_slot + "_";
+                }
+                else if (i == 1 && time_slot == "9-10"){
+                    check = check + time_slot + "_";
+                }
+                else if (i == 2 && time_slot == "10-11"){
+                    check = check + time_slot + "_";
+                }
+                else if (i == 3 && time_slot == "11-12"){
+                    check = check + time_slot + "_";
+                }
+                else if (i == 4 && time_slot == "14-15"){
+                    check = check + time_slot + "_";
+                }
+                else if (i == 5 && time_slot == "15-16"){
+                    check = check + time_slot + "_";
+                }
+                else if (i == 6 && time_slot == "16-17"){
+                    check = check + time_slot + "_";
+                }
+            }
+        {% empty %}
+        {% endfor %}
+        check = check.substring(0, check.length-1);
+        num_check = (check.split("_"));
+        var num = new Array();
+        var flag = 0;
+        var count = 1;
+        for (var x=0; x<num_check.length; x++){
+            num.push(num_check[x].split("-")[0]);
+        }
+        num.sort(function(a, b) {return a - b;});
+        for(var i = 0; i < 7; i++){
+            flag = 0;
+            for (var x=0; x<num.length; x++){
+                if (i == 0) {
+                    if (num[x] == 8){
+                        {% for av in availability %}
+                            {% if av.time_slot == "8-9" %}
+                                td = "<td><form action=\"{% url 'slot8_9' av.pk act.pk d m.pk%}\" method=\"get\"><button class=\"btn-sm ml-2\" {% if av.minutes < act.estimation_time %} disabled {% endif %}>{{av.minutes}} min</button></form></td>";
+                                t_body = t_body + td;
+                                td = "";
+                                flag = 1;
+                                break;
+                            {% endif %}
+                        {% endfor %}
+                    }
+                }
+                else if (i == 1) {
+                    if (num[x] == 9){
+                        {% for av in availability %}
+                            {% if av.time_slot == "9-10" %}
+                                td = "<td><form action=\"{% url 'slot9_10' av.pk act.pk d m.pk%}\" method=\"get\"><button class=\"btn-sm ml-2\" {% if av.minutes < act.estimation_time %} disabled {% endif %}>{{av.minutes}} min</button></form></td>";
+                                t_body = t_body + td;
+                                td = "";
+                                flag = 1;
+                                break;
+                            {% endif %}
+                        {% endfor %}
+                    }
+                }
+                else if (i == 2) {
+                    if (num[x] == 10){
+                        {% for av in availability %}
+                            {% if av.time_slot == "10-11" %}
+                                td = "<td><form action=\"{% url 'slot10_11' av.pk act.pk d m.pk%}\" method=\"get\"><button class=\"btn-sm ml-2\" {% if av.minutes < act.estimation_time %} disabled {% endif %}>{{av.minutes}} min</button></form></td>";
+                                t_body = t_body + td;
+                                td = "";
+                                flag = 1;
+                                break;
+                            {% endif %}
+                        {% endfor %}
+                    }
+                }
+                else if (i == 3) {
+                    if (num[x] == 11){
+                        {% for av in availability %}
+                            {% if av.time_slot == "11-12" %}
+                                td = "<td><form action=\"{% url 'slot11_12' av.pk act.pk d m.pk%}\" method=\"get\"><button class=\"btn-sm ml-2\" {% if av.minutes < act.estimation_time %} disabled {% endif %}>{{av.minutes}} min</button></form></td>";
+                                t_body = t_body + td;
+                                td = "";
+                                flag = 1;
+                                break;
+                            {% endif %}
+                        {% endfor %}
+                    }
+                }
+                else if (i == 4) {
+                    if (num[x] == 14){
+                        {% for av in availability %}
+                            {% if av.time_slot == "14-15" %}
+                                td = "<td><form action=\"{% url 'slot14_15' av.pk act.pk d m.pk%}\" method=\"get\"><button class=\"btn-sm ml-2\" {% if av.minutes < act.estimation_time %} disabled {% endif %}>{{av.minutes}} min</button></form></td>";
+                                t_body = t_body + td;
+                                td = "";
+                                flag = 1;
+                                break;
+                            {% endif %}
+                        {% endfor %}
+                    }
+                }
+                else if (i == 5) {
+                    if (num[x] == 15){
+                        {% for av in availability %}
+                            {% if av.time_slot == "15-16" %}
+                                td = "<td><form action=\"{% url 'slot15_16' av.pk act.pk d m.pk%}\" method=\"get\"><button class=\"btn-sm ml-2\" {% if av.minutes < act.estimation_time %} disabled {% endif %}>{{av.minutes}} min</button></form></td>";
+                                t_body = t_body + td;
+                                td = "";
+                                flag = 1;
+                                break;
+                            {% endif %}
+                        {% endfor %}
+                    }
+                }
+                else if (i == 6) {
+                    if (num[x] == 16){
+                        {% for av in availability %}
+                            {% if av.time_slot == "16-17" %}
+                                td = "<td><form action=\"{% url 'slot16_17' av.pk act.pk d m.pk%}\" method=\"get\"><button class=\"btn-sm ml-2\" {% if av.minutes < act.estimation_time %} disabled {% endif %}>{{av.minutes}} min</button></form></td>";
+                                t_body = t_body + td;
+                                td = "";
+                                flag = 1;
+                                break;
+                            {% endif %}
+                        {% endfor %}
+                    }
+                }
+            }
+            if (td == "" && flag == 0) {
+                if (i == 0){
+                    td = "<td><form action=\"{% url 'slot8_9' 0 act.pk d m.pk %}\" method=\"get\"><button class=\"btn-sm ml-2\" type=\"submit\">60 min</button></form></td>";
+                }
+                else if (i == 1){
+                    td = "<td><form action=\"{% url 'slot9_10' 0 act.pk d m.pk %}\" method=\"get\"><button class=\"btn-sm ml-2\" type=\"submit\">60 min</button></form></td>";
+                }
+                else if (i == 2){
+                    td = "<td><form action=\"{% url 'slot10_11' 0 act.pk d m.pk %}\" method=\"get\"><button class=\"btn-sm ml-2\" type=\"submit\">60 min</button></form></td>";
+                }
+                else if (i == 3){
+                    td = "<td><form action=\"{% url 'slot11_12' 0 act.pk d m.pk %}\" method=\"get\"><button class=\"btn-sm ml-2\" type=\"submit\">60 min</button></form></td>";
+                }
+                else if (i == 4){
+                    td = "<td><form action=\"{% url 'slot14_15' 0 act.pk d m.pk %}\" method=\"get\"><button class=\"btn-sm ml-2\" type=\"submit\">60 min</button></form></td>";
+                }
+                else if (i == 5){
+                    td = "<td><form action=\"{% url 'slot15_16' 0 act.pk d m.pk %}\" method=\"get\"><button class=\"btn-sm ml-2\" type=\"submit\">60 min</button></form></td>";
+                }
+                else if (i == 6){
+                    td = "<td><form action=\"{% url 'slot16_17' 0 act.pk d m.pk %}\" method=\"get\"><button class=\"btn-sm ml-2\" type=\"submit\">60 min</button></form></td>";
+                }
+            }
+            t_body = t_body + td;
+            td = "";
+        }
+        document.getElementById("t_body").innerHTML = "<tr>" + t_body + "</tr>";
+        {% endfor %}{% endfor %}{% endfor %}
     }
 </script>
-<div class="card shadow mb-4">
+<div class="card shadow mb-4" onmouseenter="createSlotTable();">
     <div class="card-header">
         <h5 id="activity_list_header" class="font-weight-normal text-primary">Disponibilità giornaliera</h5>
     </div>
-    <div class="card-body">
+    <div id="tableAssign" class="card-body">
         <div class="table-responsive">
 
             <br>
@@ -24,87 +189,8 @@
 
                     </tr>
                 </thead>
-                <tbody>
-                    {% for m in maintainer %}{% for d in day|make_list %} {% for act in list_activity %}{% for av in availability %}
+                <tbody id="t_body">
 
-                    <tr>
-                        <td>
-                            <form action="{% url 'slot8_9' av.pk act.pk 1 m.pk%}" method="get" style="float: left">
-                                <button class="btn-sm ml-2">{% if av.day == 'Lunedì' %} {{av.minutes}}{% else %} 60{% endif %} min</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="{% url 'slot9_10' av.pk act.pk 1 m.pk %}" method="get" style="float: left">
-                                <button class="btn-sm ml-2">{% if av.day == 'Martedì' %} {{av.minutes}}{% else %} 60{% endif %} min</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="{% url 'slot10_11' av.pk act.pk d m.pk %}" method="get" style="float: left">
-                                <button class="btn-sm ml-2">{% if av.day == 'Mercoledì' %} {{av.minutes}}{% else %} 60{% endif %} min</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="{% url 'slot8_9' av.pk act.pk d m.pk %}" method="get" style="float: left">
-                                <button class="btn-sm ml-2">{% if av.day == 'Giovedì' %} {{av.minutes}}{% else %} 60{% endif %} min</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="{% url 'slot8_9' av.pk act.pk d m.pk %}" method="get" style="float: left">
-                                <button class="btn-sm ml-2">{% if av.day == 'Venerdì' %} {{av.minutes}}{% else %} 60{% endif %} min</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="{% url 'slot8_9' av.pk act.pk d m.pk %}" method="get" style="float: left">
-                                <button class="btn-sm ml-2">{% if av.day == 'Sabato' %} {{av.minutes}}{% else %} 60{% endif %} min</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="{% url 'slot8_9' av.pk act.pk d m.pk %}" method="get" style="float: left">
-                                <button class="btn-sm ml-2">{% if av.day == 'Domenica' %} {{av.minutes}}{% else %} 60{% endif %} min</button>
-                            </form>
-                        </td>
-                        {% empty %}
-                        <td>
-
-                            <form action="{% url 'slot8_9' 0 act.pk d m.pk %}" method="get" style="float: left">
-                                <button class="btn-sm ml-2">60</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="{% url 'slot9_10' 0 act.pk d m.pk %}" method="get" style="float: left">
-                                <button class="btn-sm ml-2">60</button>
-                            </form>
-                        </td>
-                        <td>
-
-                            <form action="{% url 'slot10_11' 0 act.pk d m.pk  %}" method="get" style="float: left">
-                                <button class="btn-sm ml-2">60</button>
-                            </form>
-                        </td>
-                        <td>
-
-                            <form action="{% url 'slot11_12' 0 act.pk d m.pk %}" method="get" style="float: left">
-                                <button class="btn-sm ml-2">60</button>
-                            </form>
-                        </td>
-                        <td>
-
-                            <form action="{% url 'slot8_9' 0 act.pk d m.pk %}" method="get" style="float: left">
-                                <button class="btn-sm ml-2">60</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="{% url 'slot8_9' 0 act.pk d m.pk  %}" method="get" style="float: left">
-                                <button class="btn-sm ml-2">60</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="{% url 'slot8_9' 0 act.pk d m.pk %}" method="get" style="float: left">
-                                <button class="btn-sm ml-2">60</button>
-                            </form>
-                        </td>
-                    </tr>
-                    {% endfor %}{% endfor %}{% endfor %}{% endfor %}
                 </tbody>
             </table>
 

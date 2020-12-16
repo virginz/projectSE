@@ -1,9 +1,4 @@
 {% extends 'base_planner.html' %} {% block content %}
-<script>
-    function setFormAction() {
-        var action_before = document.
-    }
-</script>
 <div class="card shadow mb-4">
     <div class="card-header">
         <h5 id="activity_list_header" class="font-weight-normal text-primary">Lista Attività</h5>
@@ -20,7 +15,7 @@
                     <th>Area ⇵</th>
                     <th>Tipologia ⇵</th>
                     <th>Tempo di Intervento Stimato ⇵</th>
-                    <th></th>
+                    {% if activity.assigned_to == False %}<th></th>{% endif %}
                     </tr>
                 </thead>
                 <tbody>
@@ -31,8 +26,9 @@
                         <td width="30%">{{ activity.factory_site}} - {{ activity.factory_area}}</td>
                         <td>{{ activity.activity_typology}}</td>
                         <td width="16.5%">{{ activity.estimation_time}}</td>
+                        {% if activity.assigned_to == False %}
                         <td width="16.5%">
-                            {% if activity.assigned_to == False %}
+
                             <form action="{% url 'verify_activity' activity.pk %}" method="get" style="float: left">
                                 <span title="Verifica Attività">
                                     <button class="btn btn-success btn-circle btn-sm ml-2"><i class="fas fa-check"></i></button>
@@ -53,8 +49,9 @@
                                     <button class="btn btn-danger btn-circle btn-sm ml-2" onclick="return confirm('Are you sure?');"><i class="fas fa-trash "></i></button>
                                 </span>
                             </form>
-                            {% endif %}</td>
+
                     </tr>
+                    {% endif %}</td>
                     {% endfor %}
                 </tbody>
             </table>
