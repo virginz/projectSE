@@ -69,7 +69,7 @@ def AssignSlot8_9(request, pkAss, pkAct, day, maintainer):
             week = activity.week,
             maintainer = main
         )
-        activity.assigned_to = True
+        activity.assigned_to = main
         activity.save()
     else:
         assign = Assignment.objects.get(pk=pkAss)
@@ -84,7 +84,7 @@ def AssignSlot8_9(request, pkAss, pkAct, day, maintainer):
                 week = activity.week,
                 maintainer = main
             )
-        activity.assigned_to = True
+        activity.assigned_to = main
         activity.save()
     return HttpResponseRedirect(reverse('planner_home'))
 
@@ -115,7 +115,7 @@ def AssignSlot9_10(request, pkAss, pkAct, day, maintainer):
             week = activity.week,
             maintainer = main
         )
-        activity.assigned_to = True
+        activity.assigned_to = main
         activity.save()
     else:
         print("dentro else pkAss")
@@ -131,7 +131,7 @@ def AssignSlot9_10(request, pkAss, pkAct, day, maintainer):
                 week = activity.week,
                 maintainer = main
             )
-        activity.assigned_to = True
+        activity.assigned_to = main
         activity.save()
 
     return HttpResponseRedirect(reverse('planner_home'))
@@ -161,7 +161,7 @@ def AssignSlot10_11(request, pkAss, pkAct, day, maintainer):
             week = activity.week,
             maintainer = main
         )
-        activity.assigned_to = True
+        activity.assigned_to = main
         activity.save()
     else:
         assign = Assignment.objects.get(pk=pkAss)
@@ -176,7 +176,7 @@ def AssignSlot10_11(request, pkAss, pkAct, day, maintainer):
                 week = activity.week,
                 maintainer = main
             )
-        activity.assigned_to = True
+        activity.assigned_to = main
         activity.save()
     return HttpResponseRedirect(reverse('planner_home'))
 
@@ -205,7 +205,7 @@ def AssignSlot11_12(request, pkAss, pkAct, day, maintainer):
             week = activity.week,
             maintainer = main
         )
-        activity.assigned_to = True
+        activity.assigned_to = main
         activity.save()
     else:
         assign = Assignment.objects.get(pk=pkAss)
@@ -220,7 +220,7 @@ def AssignSlot11_12(request, pkAss, pkAct, day, maintainer):
                 week = activity.week,
                 maintainer = main
             )
-        activity.assigned_to = True
+        activity.assigned_to = main
         activity.save()
     return HttpResponseRedirect(reverse('planner_home'))
 
@@ -249,7 +249,7 @@ def AssignSlot14_15(request, pkAss, pkAct, day, maintainer):
             week = activity.week,
             maintainer = main
         )
-        activity.assigned_to = True
+        activity.assigned_to = main
         activity.save()
     else:
         assign = Assignment.objects.get(pk=pkAss)
@@ -264,7 +264,7 @@ def AssignSlot14_15(request, pkAss, pkAct, day, maintainer):
                 week = activity.week,
                 maintainer = main
             )
-        activity.assigned_to = True
+        activity.assigned_to = main
         activity.save()
     return HttpResponseRedirect(reverse('planner_home'))
 
@@ -293,7 +293,7 @@ def AssignSlot15_16(request, pkAss, pkAct, day, maintainer):
             week = activity.week,
             maintainer = main
         )
-        activity.assigned_to = True
+        activity.assigned_to = main
         activity.save()
     else:
         assign = Assignment.objects.get(pk=pkAss)
@@ -308,7 +308,7 @@ def AssignSlot15_16(request, pkAss, pkAct, day, maintainer):
                 week = activity.week,
                 maintainer = main
             )
-        activity.assigned_to = True
+        activity.assigned_to = main
         activity.save()
     return HttpResponseRedirect(reverse('planner_home'))
 
@@ -337,7 +337,7 @@ def AssignSlot16_17(request, pkAss, pkAct, day, maintainer):
             week = activity.week,
             maintainer = main
         )
-        activity.assigned_to = True
+        activity.assigned_to = main
         activity.save()
     else:
         assign = Assignment.objects.get(pk=pkAss)
@@ -352,6 +352,6 @@ def AssignSlot16_17(request, pkAss, pkAct, day, maintainer):
                 week = activity.week,
                 maintainer = main
             )
-        activity.assigned_to = True
+        activity.assigned_to = main
         activity.save()
     return HttpResponseRedirect(reverse('planner_home'))

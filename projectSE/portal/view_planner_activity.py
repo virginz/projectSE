@@ -24,9 +24,9 @@ class PlannerView(PlannerCheck, generic.ListView):
     def get_queryset(self):
         week = self.request.GET.get('week')
         if week == "all" or week == None:
-            return super().get_queryset().order_by('pk').exclude(assigned_to=True)
+            return super().get_queryset().order_by('pk').filter(assigned_to = None)
         else:
-            return super().get_queryset().order_by('pk').filter(week=week).exclude(assigned_to=True)
+            return super().get_queryset().order_by('pk').filter(week=week).filter(assigned_to=True)
 
 @user_passes_test(planner_check)
 def select_week(request):
@@ -133,10 +133,10 @@ class VerifyActivityView(OwnerVerifyActivityMixin, PlannerCheck, generic.UpdateV
 
 class ActivityAssigned(PlannerCheck, generic.ListView):
     model = Activity
-    template_name = 'portal/planner/planner_home.html'
+    template_name = 'portal/planner/activity_assigned.html'
     context_object_name = 'activity_list'
 
     def get_queryset(self):
-        return super().get_queryset().order_by('pk').filter(assigned_to=True)
+        return super().get_queryset().order_by('pk').exclude(assigned_to = None)
         
             

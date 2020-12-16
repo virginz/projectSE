@@ -1,0 +1,36 @@
+{% extends 'base_planner.html' %} {% block content %}
+<div class="card shadow mb-4">
+    <div class="card-header">
+        <h5 id="activity_list_header" class="font-weight-normal text-primary">Lista Attività</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <select id="selectWeek" onchange="javascript:location.href = this.value;" class="form-control" id="week" name="week" style="width:13%"><br>
+
+            </select>
+            <br>
+            <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0" style="text-align: center;">
+                <thead>
+                    <th>ID ⇵</th>
+                    <th>Area ⇵</th>
+                    <th>Tipologia ⇵</th>
+                    <th>Tempo di Intervento Stimato ⇵</th>
+                    <th>Maintainer ⇵</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for activity in activity_list %}
+
+                    <tr>
+                        <td width="10%">{{ activity.pk}}</td>
+                        <td width="30%">{{ activity.factory_site}} - {{ activity.factory_area}}</td>
+                        <td>{{ activity.activity_typology}}</td>
+                        <td width="16.5%">{{ activity.estimation_time}}</td>
+                        <td>{{ activity.assigned_to}}</td>
+                        {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

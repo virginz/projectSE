@@ -79,7 +79,7 @@ class Activity(models.Model):
     week = models.IntegerField(default=1, validators=[MaxValueValidator(52), MinValueValidator(1)])
     workspace_notes = models.TextField(blank=True, null=True)
     competences_needed = models.ManyToManyField(Competence, blank=True, null=True)
-    assigned_to = models.BooleanField(default=False)
+    assigned_to = models.ForeignKey(Profile, on_delete=models.CASCADE, limit_choices_to={'user_type': 'Maintainer'},blank=True, null=True)
 
     def __str__(self):
         str_to_print = ""
