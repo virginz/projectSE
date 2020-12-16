@@ -39,7 +39,7 @@
                     }
                 {% endfor %}
                 perc = (((min_disp/420)*100).toFixed(2)).toString();
-                    availability_per_day = availability_per_day + "<td><form action=\"{% for activity in list_activity %}{% url 'availability_slot' activity.pk  maintainer.pk i %}\"{% endfor %} method=\"get\" style=\"float: left\"><button class=\"btn-sm ml-2\" type=\"submit\">" + perc + "%</button></form></td>";
+                    availability_per_day = availability_per_day + "<td><form action=\"{% for activity in list_activity %}{% url 'availability_slot' activity.pk  maintainer.pk i %}\"{% endfor %} method=\"get\"><button class=\"btn-sm ml-2\" type=\"submit\">" + perc + "%</button></form></td>";
 			{% endfor %}
             t_body = t_body + maintainer + "<td style=\"text-align: left\">" + competence_needed + availability_per_day + "</tr>";
             availability_per_day = "";
