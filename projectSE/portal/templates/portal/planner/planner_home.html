@@ -44,7 +44,7 @@
                                 </span>
                             </form>
                             <form action="{% url 'activity_delete' activity.pk %}" method="post" style="float: left">
-                                <span title="Elimina Attività">
+                                <span title="Elimina Attività">{% csrf_token %}
                                     <button class="btn btn-danger btn-circle btn-sm ml-2" onclick="return confirm('Are you sure?');"><i class="fas fa-trash "></i></button>
                                 </span>
                             </form>
