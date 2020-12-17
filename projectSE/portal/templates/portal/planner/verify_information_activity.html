@@ -29,12 +29,20 @@
                             <input type="checkbox" {% if view_information.interruptible %} checked {% endif %} onclick="return false;" />
                             <br></div>
                             <b><label class="control-label">Materiali</label></b>
-                            <div>{{ view_information.materials}}</div>
+                            <div>
+                                {% if view_information.materials %}
+                                    {{ view_information.materials}}
+                                {% else %}
+                                    Non sono richiesti Materiali per lo svolgimento di tale attività.
+                                {% endif %}
+                            </div>
                             <br>
                             <b><label class="control-label">Competenze Richieste</label></b>
                             <div>
                                 {% for x in view_information.competences_needed.all %}
                                     {{ x }}<br>
+                                {% empty %}
+                                    Non sono richieste Competenze specifiche per lo svolgimento di tale attività.
                                 {% endfor %}
                             </div>
                             <br>

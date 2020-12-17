@@ -49,6 +49,7 @@
         document.getElementById("tbody").innerHTML = t_body;
         document.getElementById("backButton").style.display = "none";
         document.getElementById("selectButton").style.display = "none";
+        document.getElementById("dataTable_info").style.display = "none";
         document.getElementById("tableAssign").style.display = "block";
     }
 </script>
@@ -91,7 +92,9 @@
                         <b><label class="control-label">Competenze Richieste</label></b>
                         <div>
                             {% for x in activity.competences_needed.all %}
-                            {{ x }}<br>
+                                {{ x }}<br>
+                            {% empty %}
+                                    Non sono richieste Competenze specifiche per lo svolgimento di tale attività.
                             {% endfor %}
                         </div>
                         <br>

@@ -26,7 +26,7 @@ class PlannerView(PlannerCheck, generic.ListView):
         if week == "all" or week == None:
             return super().get_queryset().order_by('pk').filter(assigned_to = None)
         else:
-            return super().get_queryset().order_by('pk').filter(week=week).filter(assigned_to=True)
+            return super().get_queryset().order_by('pk').filter(week=week, assigned_to = None)
 
 @user_passes_test(planner_check)
 def select_week(request):
