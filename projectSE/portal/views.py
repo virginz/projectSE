@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate, login
 from django.views import generic
 from .forms import LoginForm
 
+
+#Login access
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)

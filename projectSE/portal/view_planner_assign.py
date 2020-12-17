@@ -4,14 +4,19 @@ from django.shortcuts import render
 from django.http.response import HttpResponseRedirect
 from django.urls.base import reverse
 from .models import Activity, Assignment, Profile
+from django.contrib.auth.decorators import login_required, user_passes_test
 
+#Classe utilizzata dalle classi per il controllo del tipo di utente (Planner)
 class PlannerCheck(UserPassesTestMixin):
     def test_func(self):
         return (self.request.user.profile.user_type=='Planner')
 
+#Metodo utilizzato per il controllo del tipo di utente (Planner)
 def planner_check(user):
     return user.profile.user_type == 'Planner'
 
+#Restituisce l'attività, i maintainer e le eventuali assegnazioni già presenti opportunamente filtrati
+@user_passes_test(planner_check)
 def AssignView(request, pk, week):
     activity = Activity.objects.filter(pk=pk)
     assignment = Assignment.objects.filter(week=week)
@@ -19,7 +24,8 @@ def AssignView(request, pk, week):
     day_loop = "0123456"
     return render(request, "portal/planner/assign_activity.html", {"list_activity":activity,"list_maintainer":maintainers, "list_assignment":assignment, "day_loop":day_loop})
 
-
+#Visualizzazione delle disponibilità per giorno dei maintainer
+@user_passes_test(planner_check)
 def ViewAvailabily(request, pkAct, pkMain, day):
 
 
@@ -43,6 +49,8 @@ def ViewAvailabily(request, pkAct, pkMain, day):
     maintainer=Profile.objects.filter(pk=pkMain)
     return render(request, "portal/planner/view_slot.html", {"list_activity":activity, "availability":availability, "day":day, "maintainer":maintainer})
 
+#Assegnazione dell'attività allo slot8_9 del giorno 'day' al maintainer 'maintainer'
+@user_passes_test(planner_check)
 def AssignSlot8_9(request, pkAss, pkAct, day, maintainer):
     if day==0:
         dayUrl = 'Lunedì'
@@ -88,6 +96,8 @@ def AssignSlot8_9(request, pkAss, pkAct, day, maintainer):
         activity.save()
     return HttpResponseRedirect(reverse('planner_home'))
 
+#Assegnazione dell'attività allo slot9_10 del giorno 'day' al maintainer 'maintainer'
+@user_passes_test(planner_check)
 def AssignSlot9_10(request, pkAss, pkAct, day, maintainer):
     print("Prima di if day")
     if day==0:
@@ -136,6 +146,8 @@ def AssignSlot9_10(request, pkAss, pkAct, day, maintainer):
 
     return HttpResponseRedirect(reverse('planner_home'))
 
+#Assegnazione dell'attività allo slot10_11 del giorno 'day' al maintainer 'maintainer'
+@user_passes_test(planner_check)
 def AssignSlot10_11(request, pkAss, pkAct, day, maintainer):
     if day==0:
         day = 'Lunedì'
@@ -180,6 +192,8 @@ def AssignSlot10_11(request, pkAss, pkAct, day, maintainer):
         activity.save()
     return HttpResponseRedirect(reverse('planner_home'))
 
+#Assegnazione dell'attività allo slot11_12 del giorno 'day' al maintainer 'maintainer'
+@user_passes_test(planner_check)
 def AssignSlot11_12(request, pkAss, pkAct, day, maintainer):
     if day==0:
         day = 'Lunedì'
@@ -224,6 +238,8 @@ def AssignSlot11_12(request, pkAss, pkAct, day, maintainer):
         activity.save()
     return HttpResponseRedirect(reverse('planner_home'))
 
+#Assegnazione dell'attività allo slot14_15 del giorno 'day' al maintainer 'maintainer'
+@user_passes_test(planner_check)
 def AssignSlot14_15(request, pkAss, pkAct, day, maintainer):
     if day==0:
         day = 'Lunedì'
@@ -268,6 +284,8 @@ def AssignSlot14_15(request, pkAss, pkAct, day, maintainer):
         activity.save()
     return HttpResponseRedirect(reverse('planner_home'))
 
+#Assegnazione dell'attività allo slot15_16 del giorno 'day' al maintainer 'maintainer'
+@user_passes_test(planner_check)
 def AssignSlot15_16(request, pkAss, pkAct, day, maintainer):
     if day==0:
         day = 'Lunedì'
@@ -312,6 +330,8 @@ def AssignSlot15_16(request, pkAss, pkAct, day, maintainer):
         activity.save()
     return HttpResponseRedirect(reverse('planner_home'))
 
+#Assegnazione dell'attività allo slot16_17 del giorno 'day' al maintainer 'maintainer'
+@user_passes_test(planner_check)
 def AssignSlot16_17(request, pkAss, pkAct, day, maintainer):
     if day==0:
         day = 'Lunedì'

@@ -9,13 +9,16 @@ import csv, io
 from django.urls import reverse_lazy
 from .models import Activity, Assignment
 
+#Classe utilizzata dalle classi per il controllo del tipo di utente (Planner)
 class PlannerCheck(UserPassesTestMixin):
     def test_func(self):
         return (self.request.user.profile.user_type=='Planner')
 
+#Metodo utilizzato per il controllo del tipo di utente (Planner)
 def planner_check(user):
     return user.profile.user_type == 'Planner'
 
+#Classe che restituisce il model alla homepage del planner
 class PlannerView(PlannerCheck, generic.ListView):
     model = Activity
     template_name = 'portal/planner/planner_home.html'
@@ -28,23 +31,13 @@ class PlannerView(PlannerCheck, generic.ListView):
         else:
             return super().get_queryset().order_by('pk').filter(week=week, assigned_to = None)
 
-@user_passes_test(planner_check)
-def select_week(request):
-    if request.method == 'POST':
-        form = selectWeek(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            week = cd['week']
-            return redirect('planner/home?week=' + str(week))
-    else:
-        form = selectWeek()
-        return redirect('planner_home')
-
+#Query al db per recuperare le attività ordinati per chiave primaria
 class OwnerMixin(object):
     
     def get_queryset(self):
         return super().get_queryset().order_by('pk')
 
+#Definizione degli attributi del modello da restituire
 class OwnerActivityMixin(OwnerMixin):
     model = Activity
     fields = [
@@ -63,12 +56,12 @@ class OwnerActivityMixin(OwnerMixin):
 
     success_url = reverse_lazy('planner_home')
 
-class OwnerActivityEditMixin(OwnerActivityMixin):
+#Definizione del template per la creazione dell'utente
+class OwnerActivityCreatetMixin(OwnerActivityMixin):
     template_name = 'portal/planner/create_activity.html'
-    
 
-
-class ActivityCreateView(OwnerActivityEditMixin, PlannerCheck, generic.CreateView):
+#Definizione degli attributi per la creazione di un'attività tramite il template fornito
+class ActivityCreateView(OwnerActivityCreatetMixin, PlannerCheck, generic.CreateView):
     fields = [
         'activity_type',
         'factory_site',
@@ -83,13 +76,16 @@ class ActivityCreateView(OwnerActivityEditMixin, PlannerCheck, generic.CreateVie
         'competences_needed'
     ]
 
+#Cancellazione di un'attività
 class PlannerDeleteView(PlannerCheck, generic.DeleteView):
     model = Activity
     success_url = reverse_lazy('planner_home')
 
+#Definizione del template per la modifica dell'attività
 class OwnerActivityEditMixin(OwnerActivityMixin):
     template_name = 'portal/planner/modify_activity.html'
 
+#Definizione degli attributi da modificare nel template fornito
 class ActivityEditView(OwnerActivityEditMixin, PlannerCheck, generic.UpdateView):
     fields = [
         'activity_type',
@@ -105,6 +101,7 @@ class ActivityEditView(OwnerActivityEditMixin, PlannerCheck, generic.UpdateView)
         'competences_needed'
     ]
 
+#Query al db per recuperare le attività ordinati per chiave primaria, definizione del modello da modificare e del template da utilizzare
 class OwnerVerifyActivityMixin(object):
     context_object_name = 'view_information'
 
@@ -128,12 +125,13 @@ class OwnerVerifyActivityMixin(object):
     template_name = 'portal/planner/verify_information_activity.html'
     success_url = reverse_lazy('planner_home')
     
-
+#Definizione degli attributi da modificare 
 class VerifyActivityView(OwnerVerifyActivityMixin, PlannerCheck, generic.UpdateView):
     fields = [
         'workspace_notes',
     ]
 
+#Classe che restituisce il model alla page delle Attività assegnate filtrate per settimana
 class ActivityAssigned(PlannerCheck, generic.ListView):
     model = Activity
     template_name = 'portal/planner/activity_assigned.html'

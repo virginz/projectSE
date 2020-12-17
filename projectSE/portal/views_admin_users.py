@@ -8,13 +8,16 @@ import csv, io
 from .models import Profile
 from django.urls import reverse_lazy
 
+#Classe utilizzata dalle classi per il controllo del tipo di utente (SystemAdministrator)
 class AdminCheck(UserPassesTestMixin):
     def test_func(self):
         return (self.request.user.profile.user_type=='SystemAdministrator')
 
+#Metodo utilizzato per il controllo del tipo di utente (SystemAdministrator)
 def admin_check(user):
     return user.profile.user_type == 'SystemAdministrator'
 
+#Classe che restituisce il model alla homepage dell'admin
 class AdminView(AdminCheck, generic.ListView):
     model = User
     template_name = 'portal/admin/admin_home.html'
@@ -23,6 +26,7 @@ class AdminView(AdminCheck, generic.ListView):
     def get_queryset(self):
         return super().get_queryset().order_by('username').exclude(username=self.request.user.profile.user.username).exclude(is_superuser=True)
 
+#Creazione utente tramite file
 @user_passes_test(admin_check)
 def create_user(request):
     template = 'portal/admin/create_user.html'
@@ -70,6 +74,7 @@ def create_user(request):
                             }
                 return render(request, template, context)
 
+#Creazione singolo utente tramite form
 @user_passes_test(admin_check)
 def create_single_user(request):
     template = 'portal/admin/create_single_user.html'
@@ -99,17 +104,19 @@ def create_single_user(request):
         form = addSingleUserForm()
         return render(request, template)
 
-
+#Cancellazione di un utente
 class UserDeleteView(AdminCheck, generic.DeleteView):
     model = User
     success_url = reverse_lazy('systemadministrator_home')
 
+#Query al db per recuperare gli utenti ordinati per date_joined
 class OwnerMixin(object):
 
     def get_queryset(self):
         return super().get_queryset().order_by('date_joined')
 
-class OwnerUserMixin(OwnerMixin):
+#Definizione degli attributi del modello da restituire
+class OwnerUserMixin(OwnerMixin): 
     model = User
     fields = [
         'first_name',
@@ -120,9 +127,11 @@ class OwnerUserMixin(OwnerMixin):
 
     success_url = reverse_lazy('systemadministrator_home')
 
+#Definizione del template per la modifica dell'utente
 class OwnerUserEditMixin(OwnerUserMixin):
     template_name = 'portal/admin/modify_form.html'
 
+#Definizione degli attributi da modificare nel template fornito
 class UserEditView(OwnerUserEditMixin, AdminCheck, generic.UpdateView):
     fields = [
         'first_name',
