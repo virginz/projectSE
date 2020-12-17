@@ -140,5 +140,9 @@ class ActivityAssigned(PlannerCheck, generic.ListView):
     context_object_name = 'activity_list'
 
     def get_queryset(self):
-        return super().get_queryset().order_by('pk').exclude(assigned_to = None)
+        week = self.request.GET.get('week')
+        if week == "all" or week == None:
+            return super().get_queryset().order_by('pk').exclude(assigned_to = None)
+        else:
+            return super().get_queryset().order_by('pk').filter(week=week).exclude(assigned_to = None)
         

@@ -1,4 +1,4 @@
-
+<div onmouseenter="createSlotTable();">>
 {% extends 'base_planner.html' %} {% block content %}
 <script>
     function createSlotTable(){
@@ -170,7 +170,7 @@
         {% endfor %}{% endfor %}{% endfor %}
     }
 </script>
-<div class="card shadow mb-4" onmouseenter="createSlotTable();">
+<div class="card shadow mb-4">
     <div class="card-header">
         <h5 id="activity_list_header" class="font-weight-normal text-primary">Disponibilità giornaliera</h5>
     </div>
@@ -199,3 +199,4 @@
     </div>
 </div>
 {% endblock content %}
+</div>
